@@ -9,35 +9,22 @@
 <body>
     <p id="plansza">aeeeeee</p>
     <script>
-
-
         function getBoard(){
-     let xhr=new XMLHttpRequest();
-     xhr.open("POST","plansza.php",true);
+             let xhr=new XMLHttpRequest();
+             xhr.open("POST","plansza.php",true);
     
-     xhr.onload=()=>{
-         if(xhr.readyState==XMLHttpRequest.DONE){
-             if(xhr.status===200){
-                 let data=xhr.response;
-                 document.querySelector("#plansza").innerHTML=data;
-             }else{
-               
-             }
-         }else{
-           
-         }
-        
+              xhr.onload=()=>{
+                  if(xhr.readyState==XMLHttpRequest.DONE){
+                       if(xhr.status===200){
+                         let data=xhr.response;
+                         document.querySelector("#plansza").innerHTML=data;
+                       } 
+                  }            
+         } 
      }
-     xhr.send();
-   
-
-       
-       
-       
+     xhr.send();      
     }
-
-   getBoard()
-       
+   getBoard()   
 </script>
 </body>
 </html>
