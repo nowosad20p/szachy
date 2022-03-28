@@ -9,6 +9,7 @@
 <body>
     <p id="plansza">aeeeeee</p>
     <script>
+
 document.write("plansza.php?"+(window.location.href).split("?")[1]);
   
         function getBoard(){
@@ -31,17 +32,5 @@ document.write("plansza.php?"+(window.location.href).split("?")[1]);
            
          }
         
-     }
-     xhr.send();
-   
 
-       
-       
-       
-    }
-
-   setInterval(getBoard,100);
-       
-</script>
-</body>
-</html>
+      
