@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <?php
+    header("Location:game.php?gameRoom=".$_GET["joinGameCode"]);
+    ?>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <?php
-$plansza=fopen("plansza.txt","r");
+$plansza=fopen("games/".$_GET["gameRoom"],"r");
 
 echo fread($plansza,5);
 
