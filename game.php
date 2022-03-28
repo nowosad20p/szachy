@@ -34,3 +34,6 @@ document.write("plansza.php?"+(window.location.href).split("?")[1]);
         
 
       
+</script>
+</body>
+</html>
