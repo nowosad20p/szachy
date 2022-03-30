@@ -7,15 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-
-    $fileName="";
-    for($i=0;$i<6;$i++){
-        $fileName=$fileName.chr(rand(65,90));
-    }
-    $file=fopen("games/".$fileName,"c");
-    fwrite($file,"player1:\nplayer2:\nboard:");
-    header("Location:game.php?gameRoom=".$fileName);
-    ?>
+<form action="login.inc.php" method="POST">
+        <input type="text" name="login">
+        <input type="password" name="password">
+        <input type="submit" name="submit">
+    </form>
 </body>
 </html>

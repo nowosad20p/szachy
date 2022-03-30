@@ -7,12 +7,21 @@
     <title>Strona główna</title>
 </head>
 <body>
-    <form action="createGame.php">
+   
+    <?php
+    ob_start();
+    session_start();
+    if(isset($_SESSION["user"])){
+        echo '<form action="createGame.php">
         <input type="submit" value="Stwórz grę" name="createGameBtn">
     </form>
     <form action="joinGame.php" method="GET">
     <input type="text" name="joinGameCode">
     <input type="submit" value="Dołącz do gry" name="joinGameBtn">
-    </form>
+    </form>"';
+    }else{
+       echo '<form action="login.php"><input type="submit" value="zaloguj się" name="zalogujBtn"></form>  <form action="signup.php"><input type="submit" value="zarejestruj się" name="zarejestrujBtn"></form>';
+    }
+    ?>
 </body>
 </html>
