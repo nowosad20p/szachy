@@ -22,15 +22,29 @@ function changeParam($filePath,$paramName,$paramValue){
     $file=fopen($filePath,"r+");
     while($line=fgets($file)){
         if(explode(":",$line)[0]==$paramName){
-           $line=$paramName.":".$paramValue;
+           $line=$paramName.":".$paramValue."\n";
         }
         $newFile=$newFile.$line;
 
 }
+
 echo $newFile;
 fclose($file);
 $file=fopen($filePath,"w");
 
 fwrite($file,$newFile);
 fclose($file);
+}
+function getParam($filePath,$paramName){
+    $file=fopen($filePath,"r");
+    while ($line = fgets($file)){
+        if(explode(":",$line)[0]==$paramName){
+            if(explode(":",$line)[1]!="\n"){
+            return trim(explode(":",$line)[1]);
+            }else{
+                return null;
+            }
+        }
+    }
+     return null;
 }
