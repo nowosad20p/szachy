@@ -1,50 +1,51 @@
 <?php
-function findUserId($login){
-    $users=fopen("users.txt","r");
-    $licznik=0;
-    while($line=fgets($users)){
+function findUserId($login)
+{
+    $users = fopen("users.txt", "r");
+    $licznik = 0;
+    while ($line = fgets($users)) {
 
-        if($login==explode(" ",$line)[0]){
+        if ($login == explode(" ", $line)[0]) {
             fclose($users);
             return $licznik;
         }
         $licznik++;
-        
-     }
-     return null;
+    }
+    return null;
 }
-function findUserName(){
-    $users=fopen("users.txt","r");
-    
+function findUserName()
+{
+    $users = fopen("users.txt", "r");
 }
-function changeParam($filePath,$paramName,$paramValue){
-    $newFile="";
-    $file=fopen($filePath,"r+");
-    while($line=fgets($file)){
-        if(explode(":",$line)[0]==$paramName){
-           $line=$paramName.":".$paramValue."\n";
+function changeParam($filePath, $paramName, $paramValue)
+{
+    $newFile = "";
+    $file = fopen($filePath, "r+");
+    while ($line = fgets($file)) {
+        if (explode(":", $line)[0] == $paramName) {
+            $line = $paramName . ":" . $paramValue . "\n";
         }
-        $newFile=$newFile.$line;
+        $newFile = $newFile . $line;
+    }
 
+    echo $newFile;
+    fclose($file);
+    $file = fopen($filePath, "w");
+
+    fwrite($file, $newFile);
+    fclose($file);
 }
-
-echo $newFile;
-fclose($file);
-$file=fopen($filePath,"w");
-
-fwrite($file,$newFile);
-fclose($file);
-}
-function getParam($filePath,$paramName){
-    $file=fopen($filePath,"r");
-    while ($line = fgets($file)){
-        if(explode(":",$line)[0]==$paramName){
-            if(explode(":",$line)[1]!="\n"){
-            return trim(explode(":",$line)[1]);
-            }else{
+function getParam($filePath, $paramName)
+{
+    $file = fopen($filePath, "r");
+    while ($line = fgets($file)) {
+        if (explode(":", $line)[0] == $paramName) {
+            if (explode(":", $line)[1] != "\n") {
+                return trim(explode(":", $line)[1]);
+            } else {
                 return null;
             }
         }
     }
-     return null;
+    return null;
 }
