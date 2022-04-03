@@ -11,7 +11,7 @@ while ($line = fgets($users)) {
 
 
     if ($_POST["login"] == trim(explode(" ", $line)[0])) {
-        if (password_verify($_POST["password"], explode(" ", $line)[1])) {
+        if (password_verify(trim($_POST["password"]), trim(explode(" ", $line)[1]))) {
             $_SESSION["user"] = $_POST["login"];
             header("Location:index.php");
         } else {

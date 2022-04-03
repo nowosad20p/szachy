@@ -6,7 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gra</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 
 <body>
     <p id="plansza">aeeeeee</p>
@@ -21,7 +23,7 @@
             tresc = document.querySelector("#tresc").value;
             let xhr = new XMLHttpRequest();
 
-            xhr.open("GET", "plansza.php?mode=update&tresc=" + tresc + "&" + (window.location.href).split("?")[1], true);
+            xhr.open("GET", "board.php?mode=update&tresc=" + tresc + "&" + (window.location.href).split("?")[1], true);
 
 
 
@@ -35,7 +37,7 @@
 
             let xhr = new XMLHttpRequest();
 
-            xhr.open("POST", "plansza.php?mode=get&" + (window.location.href).split("?")[1], true);
+            xhr.open("POST", "board.php?mode=get&" + (window.location.href).split("?")[1], true);
 
             xhr.onload = () => {
                 if (xhr.readyState == XMLHttpRequest.DONE) {
@@ -49,10 +51,11 @@
                 }
             }
             xhr.send();
+            
         }
 
 
-        setInterval(getBoard, 100);
+        setInterval(getBoard, 10020);
     </script>
     <?php
     ob_start();

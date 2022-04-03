@@ -13,5 +13,5 @@ while($line=fgets($users)){
 }
 fclose($users);
 if(!$isTaken){
- file_put_contents("users.txt","\n".$_POST["login"]." ".$_POST["password"],FILE_APPEND);
+ file_put_contents("users.txt","\n".$_POST["login"]." ".password_hash(trim($_POST["password"]),PASSWORD_DEFAULT),FILE_APPEND);
 }
