@@ -35,7 +35,28 @@ function generateBoard(){
         $board[$i][6]=new Pawn($i,6,"black");
         
     }
+    $board[0][0]=new Rook(0,0,"white");
+    $board[1][0]=new Knight(1,0,"white");
+    $board[2][0]=new Bishop(2,0,"white");
+    $board[3][0]=new King(3,0,"white");
+    $board[4][0]=new Queen(4,0,"white");
+    $board[5][0]=new Bishop(5,0,"white");
+    $board[6][0]=new Knight(6,0,"white");
+    $board[7][0]=new Rook(7,0,"white");
 
+    $board[0][7]=new Rook(0,0,"black");
+    $board[1][7]=new Knight(1,0,"black");
+    $board[2][7]=new Bishop(2,0,"black");
+    $board[3][7]=new King(3,0,"black");
+    $board[4][7]=new Queen(4,0,"black");
+    $board[5][7]=new Bishop(5,0,"black");
+    $board[6][7]=new Knight(6,0,"black");
+    $board[7][7]=new Rook(7,0,"black");
+
+
+
+
+    
     $moves=getMovesArray();
     if($moves!=null){
     foreach($moves as $value){
@@ -64,6 +85,12 @@ function generateBoard(){
             }
             if($board[$i][$j] instanceof Rook){
                 $piece="Rook";
+            }
+            if($board[$i][$j] instanceof Queen){
+                $piece="Queen";
+            }
+            if($board[$i][$j] instanceof King){
+                $piece="King";
             }
             $pieceUrl="images/".$pieceColor.$piece.".png";
             
