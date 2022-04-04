@@ -55,7 +55,7 @@
         }
 
 
-        setInterval(getBoard, 10020);
+        setInterval(getBoard, 1000);
     </script>
     <?php
     ob_start();

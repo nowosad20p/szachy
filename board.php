@@ -2,7 +2,7 @@
 require_once("functions.php");
 require("chessPieces.php");
 if($_GET["mode"]=="update"){
-    changeParam("games/".$_GET["gameRoom"],"board",$_GET["tresc"]);
+    changeParam("games/".$_GET["gameRoom"],"board",getParam("games/".$_GET["gameRoom"],"board")." ".$_GET["tresc"]);
 }
 if($_GET["mode"]=="get"){
 echo $_GET["gameRoom"]."<br>";
@@ -31,6 +31,32 @@ function generateBoard(){
         $board[$i][1]=new Pawn($i,1,"white");
         
     }
+    for($i=0;$i<8;$i++){
+        $board[$i][6]=new Pawn($i,6,"black");
+        
+    }
+    $board[0][0]=new Rook(0,0,"white");
+    $board[1][0]=new Knight(1,0,"white");
+    $board[2][0]=new Bishop(2,0,"white");
+    $board[3][0]=new King(3,0,"white");
+    $board[4][0]=new Queen(4,0,"white");
+    $board[5][0]=new Bishop(5,0,"white");
+    $board[6][0]=new Knight(6,0,"white");
+    $board[7][0]=new Rook(7,0,"white");
+
+    $board[0][7]=new Rook(0,0,"black");
+    $board[1][7]=new Knight(1,0,"black");
+    $board[2][7]=new Bishop(2,0,"black");
+    $board[3][7]=new King(3,0,"black");
+    $board[4][7]=new Queen(4,0,"black");
+    $board[5][7]=new Bishop(5,0,"black");
+    $board[6][7]=new Knight(6,0,"black");
+    $board[7][7]=new Rook(7,0,"black");
+
+
+
+
+    
     $moves=getMovesArray();
     if($moves!=null){
     foreach($moves as $value){
@@ -43,7 +69,7 @@ function generateBoard(){
     $licznik=0;
     for($j=0;$j<8;$j++){
         for($i=0;$i<8;$i++){
-            $piece="a ";
+            $piece="";
             $pieceColor=null;
             if(is_object($board[$i][$j])){
                 $pieceColor=$board[$i][$j]->color;
@@ -60,16 +86,26 @@ function generateBoard(){
             if($board[$i][$j] instanceof Rook){
                 $piece="Rook";
             }
-            if(($licznik+$j)%2==0){
-                $html=$html."<div class='".$pieceColor.$piece." bialePole'>".$piece."</div>";
-            }else{
-                $html=$html."<div class='".$pieceColor.$piece." czarnePole'>".$piece."</div>";
+            if($board[$i][$j] instanceof Queen){
+                $piece="Queen";
             }
-          
+            if($board[$i][$j] instanceof King){
+                $piece="King";
+            }
+            $pieceUrl="images/".$pieceColor.$piece.".png";
+            
+            if(($licznik+$j)%2==0){
+                $html=$html."<div style=background-image:url('".$pieceUrl."') class='".$pieceColor.$piece." bialePole'></div>";
+            }else{
+                $html=$html."<div style=background-image:url('".$pieceUrl."') class='".$pieceColor.$piece." czarnePole'></div>";
+            }
+           
             $licznik++;
         }
     }
+    
     $html=$html."</div>";
+    
     return $html;
 }
 
