@@ -1,8 +1,15 @@
 <?php
+
 require_once("functions.php");
 require("chessPieces.php");
+$board=[];
+
 if($_GET["mode"]=="update"){
-    changeParam("games/".$_GET["gameRoom"],"board",getParam("games/".$_GET["gameRoom"],"board")." ".$_GET["tresc"]);
+    if(getBoard()[$_GET["tresc"][0]][$_GET["tresc"][1]]!=null){
+        changeParam("games/".$_GET["gameRoom"],"board",getParam("games/".$_GET["gameRoom"],"board")." ".$_GET["tresc"]);
+    }
+    
+    
 }
 if($_GET["mode"]=="get"){
 echo $_GET["gameRoom"]."<br>";
@@ -17,8 +24,7 @@ if(explode(":",$line)[0]=="board"){
 var_dump(generateBoard());
 fclose($plansza);
 }
-function generateBoard(){
-    //tworzenie planszy i wczytywanie ruchów
+function getBoard(){
     $board=[];
     for($i=0;$i<8;$i++){
         $new=[];
@@ -63,7 +69,13 @@ function generateBoard(){
         $board[$value[2]][$value[3]]=$board[$value[0]][$value[1]];
         $board[$value[0]][$value[1]]=null;
     }
+
 }
+return $board;
+}
+function generateBoard(){
+    //tworzenie planszy i wczytywanie ruchów
+   $board=getBoard();
     //zapis planszy do kodu html
     $html="<div class='board'>";
     $licznik=0;
@@ -95,9 +107,9 @@ function generateBoard(){
             $pieceUrl="images/".$pieceColor.$piece.".png";
             
             if(($licznik+$j)%2==0){
-                $html=$html."<div style=background-image:url('".$pieceUrl."') class='".$pieceColor.$piece." bialePole'></div>";
+                $html=$html."<div style=background-image:url('".$pieceUrl."') class='".$pieceColor.$piece." bialePole' id='".$i.$j."'.></div>";
             }else{
-                $html=$html."<div style=background-image:url('".$pieceUrl."') class='".$pieceColor.$piece." czarnePole'></div>";
+                $html=$html."<div style=background-image:url('".$pieceUrl."') class='".$pieceColor.$piece." czarnePole' id='".$i.$j."'></div>";
             }
            
             $licznik++;
@@ -118,4 +130,4 @@ return null;
 
 return explode(" ",getParam("games/".$_GET["gameRoom"],"board"));
 }
-?>
+

@@ -16,11 +16,11 @@
     <p id="poka"></p>
     <button id="dzialajPlz">Wyślij</button>
     <script>
-        let a = document.querySelector("#dzialajPlz");
-        a.addEventListener("click", updateTxtFile);
+        let active=null;
+       
 
-        function updateTxtFile() {
-            tresc = document.querySelector("#tresc").value;
+        function updateBoard(tresc) {
+            
             let xhr = new XMLHttpRequest();
 
             xhr.open("GET", "board.php?mode=update&tresc=" + tresc + "&" + (window.location.href).split("?")[1], true);
@@ -32,7 +32,21 @@
         }
         getBoard();
 
-
+        function divClick(){
+            if(active==null){
+                active=this;
+                console.log(active);
+                
+            }else{
+                if(active.id!=this.id){
+                updateBoard(active.id+this.id);
+                active=null;
+                }else{
+                    active=null;
+                   
+                }
+            }
+        }
         function getBoard() {
 
             let xhr = new XMLHttpRequest();
@@ -46,6 +60,10 @@
                         let data = xhr.response;
                         if (data != document.querySelector("#plansza").innerHTML) {
                             document.querySelector("#plansza").innerHTML = data;
+                            pola=document.querySelectorAll(".board>div");
+                            for(i=0;i<pola.length;i++){
+                                pola[i].addEventListener("click",divClick,false)
+                            }
                         }
                     }
                 }
@@ -64,14 +82,7 @@
     $game = fopen("games/" . $_GET["gameRoom"], "r+");
     $player1 = getParam("games/" . $_GET["gameRoom"], "player1");
     $player2 = getParam("games/" . $_GET["gameRoom"], "player2");
-    // while($line=fgets($game)){
-    //     if(explode(":",$line)[0]=="player1"){
-    //         $player1 = explode(":",$line)[1];
-    //     }
-    //     if(explode(":",$line)[0]=="player2"){
-    //         $player2 = explode(":",$line)[1];
-    //     }
-    // }
+ 
 
     fclose($game);
 
