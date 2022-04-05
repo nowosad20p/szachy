@@ -11,6 +11,9 @@ if($_GET["mode"]=="update"){
     
     
 }
+if($_GET["mode"]=="getBoard"){
+    echo getParam("games/".$_GET["gameRoom"],"board");
+}
 if($_GET["mode"]=="get"){
 echo $_GET["gameRoom"]."<br>";
 $plansza=fopen("games/".$_GET["gameRoom"],"r");

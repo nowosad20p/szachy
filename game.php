@@ -18,14 +18,13 @@
     <script>
         let active=null;
        
-
+        
         function updateBoard(tresc) {
             
             let xhr = new XMLHttpRequest();
 
             xhr.open("GET", "board.php?mode=update&tresc=" + tresc + "&" + (window.location.href).split("?")[1], true);
-
-
+           
 
 
             xhr.send();
@@ -35,45 +34,73 @@
         function divClick(){
             if(active==null){
                 active=this;
-                console.log(active);
+               this.classList+=" aktywny";
+               console.log(this);
                 
             }else{
                 if(active.id!=this.id){
                 updateBoard(active.id+this.id);
+                
                 active=null;
+
                 }else{
-                    active=null;
                    
+                   active.classList.remove("aktywny")
+                console.log(active.classList);
+                active=null;
                 }
+
             }
         }
+        let board;
         function getBoard() {
+            
+            let xhrr = new XMLHttpRequest();
 
-            let xhr = new XMLHttpRequest();
+            xhrr.open("POST", "board.php?mode=getBoard&" + (window.location.href).split("?")[1], true);
 
-            xhr.open("POST", "board.php?mode=get&" + (window.location.href).split("?")[1], true);
+            xhrr.onload = () => {
+                if (xhrr.readyState == XMLHttpRequest.DONE) {
 
-            xhr.onload = () => {
-                if (xhr.readyState == XMLHttpRequest.DONE) {
+                    if (xhrr.status === 200) {
+                        let data = xhrr.response;
+                        if (data != board) {
+                            board=data
+                            let xhr = new XMLHttpRequest();
 
-                    if (xhr.status === 200) {
-                        let data = xhr.response;
-                        if (data != document.querySelector("#plansza").innerHTML) {
-                            document.querySelector("#plansza").innerHTML = data;
-                            pola=document.querySelectorAll(".board>div");
-                            for(i=0;i<pola.length;i++){
-                                pola[i].addEventListener("click",divClick,false)
+                              xhr.open("POST", "board.php?mode=get&" + (window.location.href).split("?")[1], true);
+
+                                 xhr.onload = () => {
+                                                      if (xhr.readyState == XMLHttpRequest.DONE) {
+
+                                    if (xhr.status === 200) {
+                                             let data = xhr.response;
+                                                 if (data != document.querySelector("#plansza").innerHTML) {
+                                              document.querySelector("#plansza").innerHTML = data;
+                                     pola=document.querySelectorAll(".board>div");
+                                        for(i=0;i<pola.length;i++){
+                                        pola[i].addEventListener("click",divClick,false)
+                                
                             }
                         }
                     }
                 }
             }
+           
             xhr.send();
-            
         }
+                        }
+                    }
+                }
+                xhrr.send();
+            }
+            
+
+  
+            
 
 
-        setInterval(getBoard, 1000);
+        setInterval(getBoard, 100);
     </script>
     <?php
     ob_start();
