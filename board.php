@@ -1,12 +1,56 @@
 <?php
-
+ob_start();
+session_start();
 require_once("functions.php");
 require("chessPieces.php");
-$board=[];
-
+$board=getBoard();
+ 
 if($_GET["mode"]=="update"){
-    if(getBoard()[$_GET["tresc"][0]][$_GET["tresc"][1]]!=null){
-        changeParam("games/".$_GET["gameRoom"],"board",getParam("games/".$_GET["gameRoom"],"board")." ".$_GET["tresc"]);
+    if(getParam("games/".$_GET["gameRoom"],"player1")==$_SESSION["user"]){
+       
+        if(getParam("games/".$_GET["gameRoom"],"chosenPiece1")!=null){
+            if(getParam("games/".$_GET["gameRoom"],"currentmove")=="player1"){
+                if($board[$_GET["tresc"][0]][$_GET["tresc"][1]]->color=="black"||$board[$_GET["tresc"][0]][$_GET["tresc"][1]]==null){
+                if(getParam("games/".$_GET["gameRoom"],"chosenPiece1")!=$_GET["tresc"]){
+            changeParam("games/".$_GET["gameRoom"],"board",getParam("games/".$_GET["gameRoom"],"board")." ".getParam("games/".$_GET["gameRoom"],"chosenPiece1").$_GET["tresc"]);
+                changeParam("games/".$_GET["gameRoom"],"currentmove","player2");
+                }
+            }
+            }
+
+            changeParam("games/".$_GET["gameRoom"],"chosenPiece1",null);
+        }else{
+            
+            if($board[$_GET["tresc"][0]][$_GET["tresc"][1]]->color=="white"){
+           if($board[$_GET["tresc"][0]][$_GET["tresc"][1]]!=null){
+            changeParam("games/".$_GET["gameRoom"],"chosenPiece1",$_GET["tresc"]);
+           }
+        }
+        }
+    
+    }
+    if(getParam("games/".$_GET["gameRoom"],"player2")==$_SESSION["user"]){
+       
+        if(getParam("games/".$_GET["gameRoom"],"chosenPiece2")!=null){
+            if(getParam("games/".$_GET["gameRoom"],"currentmove")=="player2"){
+                if($board[$_GET["tresc"][0]][$_GET["tresc"][1]]->color=="white"||$board[$_GET["tresc"][0]][$_GET["tresc"][1]]==null){
+                if(getParam("games/".$_GET["gameRoom"],"chosenPiece2")!=$_GET["tresc"]){
+            changeParam("games/".$_GET["gameRoom"],"board",getParam("games/".$_GET["gameRoom"],"board")." ".getParam("games/".$_GET["gameRoom"],"chosenPiece2").$_GET["tresc"]);
+                changeParam("games/".$_GET["gameRoom"],"currentmove","player1");
+                }
+            }
+            }
+
+            changeParam("games/".$_GET["gameRoom"],"chosenPiece2",null);
+        }else{
+            
+            if($board[$_GET["tresc"][0]][$_GET["tresc"][1]]->color=="black"){
+           if($board[$_GET["tresc"][0]][$_GET["tresc"][1]]!=null){
+            changeParam("games/".$_GET["gameRoom"],"chosenPiece2",$_GET["tresc"]);
+           }
+        }
+        }
+    
     }
     
     
@@ -15,17 +59,11 @@ if($_GET["mode"]=="getBoard"){
     echo getParam("games/".$_GET["gameRoom"],"board");
 }
 if($_GET["mode"]=="get"){
-echo $_GET["gameRoom"]."<br>";
-$plansza=fopen("games/".$_GET["gameRoom"],"r");
 
-while($line=fgets($plansza)){
-if(explode(":",$line)[0]=="board"){
-    echo explode(":",$line)[1];
-}
 
-}
-var_dump(generateBoard());
-fclose($plansza);
+
+echo generateBoard();
+
 }
 function getBoard(){
     $board=[];
@@ -84,7 +122,7 @@ function generateBoard(){
     $licznik=0;
     for($j=0;$j<8;$j++){
         for($i=0;$i<8;$i++){
-            $piece="";
+            $piece="none";
             $pieceColor=null;
             if(is_object($board[$i][$j])){
                 $pieceColor=$board[$i][$j]->color;
@@ -108,11 +146,19 @@ function generateBoard(){
                 $piece="King";
             }
             $pieceUrl="images/".$pieceColor.$piece.".png";
+            $specialClass=null;
+            if(trim($i."".$j)==trim(getParam("games/".$_GET["gameRoom"],"chosenPiece1"))&&$_SESSION["user"]==getParam("games/".$_GET["gameRoom"],"player1")){
+            $specialClass="aktywny";
+        
+            }
+            if(trim($i."".$j)==trim(getParam("games/".$_GET["gameRoom"],"chosenPiece2"))&&$_SESSION["user"]==getParam("games/".$_GET["gameRoom"],"player2")){
+                $specialClass="aktywny";
             
+                }
             if(($licznik+$j)%2==0){
-                $html=$html."<div style=background-image:url('".$pieceUrl."') class='".$pieceColor.$piece." bialePole' id='".$i.$j."'.></div>";
+                $html=$html."<div style=background-image:url('".$pieceUrl."') class='".$pieceColor.$piece." ".$specialClass." bialePole' id='".$i.$j."'.></div>";
             }else{
-                $html=$html."<div style=background-image:url('".$pieceUrl."') class='".$pieceColor.$piece." czarnePole' id='".$i.$j."'></div>";
+                $html=$html."<div style=background-image:url('".$pieceUrl."') class='".$pieceColor.$piece." ".$specialClass." czarnePole' id='".$i.$j."'></div>";
             }
            
             $licznik++;

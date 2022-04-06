@@ -1,0 +1,12 @@
+nav>ul{
+    list-style-type: none;
+    display:flex;
+    justify-content: space-around;
+    background-color: #131414;
+    margin:0;
+
+}
+nav>ul>li{
+    background-color: #131414;
+    padding:30px;
+}
