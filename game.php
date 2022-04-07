@@ -19,84 +19,83 @@
     <p id="poka"></p>
     <button id="dzialajPlz">Wyślij</button>
     <script>
-      let active = null;
+        let active = null;
 
 
-function updateBoard() {
+        function updateBoard() {
 
-    let xhr = new XMLHttpRequest();
+            let xhr = new XMLHttpRequest();
 
-    xhr.open("GET", "board.php?mode=update&tresc=" + this.id + "&" + (window.location.href).split("?")[1], true);
-
-
-
-    xhr.send();
-
-    getBoard();
-}
-getBoard();
+            xhr.open("GET", "board.php?mode=update&tresc=" + this.id + "&" + (window.location.href).split("?")[1], true);
 
 
-let board;
 
-function setBoard() {
-    let xhr = new XMLHttpRequest();
+            xhr.send();
 
-    xhr.open("POST", "board.php?mode=get&" + (window.location.href).split("?")[1], true);
-
-    xhr.onload = () => {
-        if (xhr.readyState == XMLHttpRequest.DONE) {
-
-            if (xhr.status === 200) {
-                let data = xhr.response;
-
-                document.querySelector("#plansza").innerHTML = data;
-                pola = document.querySelectorAll(".board>div");
-                for (i = 0; i < pola.length; i++) {
-                    pola[i].addEventListener("click", updateBoard, false)
-
-                }
-
-            }
+            getBoard();
         }
-    }
+        getBoard();
 
-    xhr.send();
-}
 
-function getBoard() {
+        let board;
 
-    let xhrr = new XMLHttpRequest();
+        function setBoard() {
+            let xhr = new XMLHttpRequest();
 
-    xhrr.open("POST", "board.php?mode=getBoard&" + (window.location.href).split("?")[1], true);
+            xhr.open("POST", "board.php?mode=get&" + (window.location.href).split("?")[1], true);
 
-    xhrr.onload = () => {
-        if (xhrr.readyState == XMLHttpRequest.DONE) {
+            xhr.onload = () => {
+                if (xhr.readyState == XMLHttpRequest.DONE) {
 
-            if (xhrr.status === 200) {
-                let data = xhrr.response;
-                if (data != board) {
-                    board = data
-                    setBoard()
+                    if (xhr.status === 200) {
+                        let data = xhr.response;
+
+                        document.querySelector("#plansza").innerHTML = data;
+                        pola = document.querySelectorAll(".board>div");
+                        for (i = 0; i < pola.length; i++) {
+                            pola[i].addEventListener("click", updateBoard, false)
+
+                        }
+
+                    }
                 }
-                setBoard()
             }
 
+            xhr.send();
         }
-    }
-    xhrr.send();
-}
-setInterval(getBoard,1000)
 
+        function getBoard() {
+
+            let xhrr = new XMLHttpRequest();
+
+            xhrr.open("POST", "board.php?mode=getBoard&" + (window.location.href).split("?")[1], true);
+
+            xhrr.onload = () => {
+                if (xhrr.readyState == XMLHttpRequest.DONE) {
+
+                    if (xhrr.status === 200) {
+                        let data = xhrr.response;
+                        if (data != board) {
+                            board = data
+                            setBoard()
+                        }
+                        setBoard()
+                    }
+
+                }
+            }
+            xhrr.send();
+        }
+        setInterval(getBoard, 11000)
     </script>
     <?php
     ob_start();
     session_start();
     require_once("functions.php");
- 
+
     $player1 = getParam("games/" . $_GET["gameRoom"], "player1");
     $player2 = getParam("games/" . $_GET["gameRoom"], "player2");
- 
+
 
     if (is_null($player1) || trim($player1) == $_SESSION["user"]) {
 

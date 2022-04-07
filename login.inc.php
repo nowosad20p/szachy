@@ -16,8 +16,8 @@ while ($line = fgets($users)) {
             header("Location:index.php");
         } else {
 
-            echo trim($_POST["password"]);
-            //header("Location:index.php?error=wrongPassword");
+
+            header("Location:index.php?error=wrongPassword");
         }
     }
 }
