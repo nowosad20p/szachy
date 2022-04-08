@@ -6,7 +6,8 @@
     <li>Kontakt</li>
     <li>
     <?php
-   
+
+    ob_start();
   
     if(!isset($_SESSION["user"])){
         echo"Zaloguj się";

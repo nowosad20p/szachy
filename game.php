@@ -14,14 +14,65 @@
     <?php
     require_once("nav.php");
     ?>
-    <p id="plansza">aeeeeee</p>
+    <main>
+        <div id="game">
+    <h2 id="kod"></h2>
+    <div class="board"></div>
+    </div>
+   
+    <div id="czatContainer">
+    <div id="czat"></div>
     <input type="text" id="tresc">
-    <p id="poka"></p>
-    <button id="dzialajPlz">Wyślij</button>
+    <button id="czatBtn">Wyślij</button> 
+    </div>
+    </main>
     <script>
-        let active = null;
+        document.querySelector("#czatBtn").addEventListener("click",sendMessage);
 
+        getRoomName();
+        function getChat(){
+            let request=new XMLHttpRequest();
+            request.open("GET","chat.php?"+(window.location.href).split("?")[1]+"&mode=get",true);
+            request.onload=()=>{
+                if (request.readyState == XMLHttpRequest.DONE) {
 
+                if (request.status === 200) {
+                    data=request.response;
+                    document.querySelector("#czat").innerHTML=data;
+                }
+
+            }
+            
+
+        }
+        request.send();
+    }
+    function sendMessage(){
+        tresc=document.querySelector("#tresc").value;
+        let request=new XMLHttpRequest();
+        request.open("GET","chat.php?"+(window.location.href).split("?")[1]+"&mode=update"+"&tresc="+tresc,true);
+        request.send();
+        
+        getChat();
+       
+    }
+        function getRoomName(){
+            let request=new XMLHttpRequest();
+            request.open("GET","board.php?"+(window.location.href).split("?")[1]+"&mode=getKey",true);
+            request.onload=()=>{
+                if (request.readyState == XMLHttpRequest.DONE) {
+
+                if (request.status === 200) {
+                    data=request.response;
+                    document.querySelector("#kod").innerHTML=data;
+                }
+
+            }
+
+        }
+        request.send();
+        document.querySelector("#kod").onclick=navigator.clipboard.writeText(window.location.href);
+        }
         function updateBoard() {
 
             let xhr = new XMLHttpRequest();
@@ -50,7 +101,7 @@
                     if (xhr.status === 200) {
                         let data = xhr.response;
 
-                        document.querySelector("#plansza").innerHTML = data;
+                        document.querySelector(".board").innerHTML = data;
                         pola = document.querySelectorAll(".board>div");
                         for (i = 0; i < pola.length; i++) {
                             pola[i].addEventListener("click", updateBoard, false)
@@ -86,8 +137,10 @@
             }
             xhrr.send();
         }
-        setInterval(getBoard, 11000)
+        setInterval(getBoard, 1000)
+        setInterval(getChat, 1000)
     </script>
+
     <?php
     ob_start();
     session_start();
@@ -106,7 +159,7 @@
             changeParam("games/" . $_GET["gameRoom"], "player2", $_SESSION["user"]);
         } else {
 
-            echo $player1 . " " . $player2;
+           
             header("Location:index.php?error=fullRoom");
         }
     }

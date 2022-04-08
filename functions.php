@@ -28,7 +28,7 @@ function changeParam($filePath, $paramName, $paramValue)
         $newFile = $newFile . $line;
     }
 
-    echo $newFile;
+  
     fclose($file);
     $file = fopen($filePath, "w");
 

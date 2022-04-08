@@ -60,6 +60,9 @@ if ($_GET["mode"] == "get") {
 
     echo generateBoard();
 }
+if($_GET["mode"]=="getKey"){
+    echo $_GET["gameRoom"];
+}
 function getBoard()
 {
     $board = [];
@@ -95,10 +98,14 @@ function getBoard()
     $board[7][7] = new Rook("black");
 
 
+    $board=makeMoves($board, getMovesArray());
 
 
-
-    $moves = getMovesArray();
+    
+    return $board;
+}
+function makeMoves($board,$moves){
+  
     if ($moves != null) {
         foreach ($moves as $value) {
             $board[$value[2]][$value[3]] = $board[$value[0]][$value[1]];
@@ -112,7 +119,7 @@ function generateBoard()
     //tworzenie planszy i wczytywanie ruchów
     $board = getBoard();
     //zapis planszy do kodu html
-    $html = "<div class='board'>";
+    $html = "";
     $licznik = 0;
     for ($j = 0; $j < 8; $j++) {
         for ($i = 0; $i < 8; $i++) {
@@ -150,7 +157,7 @@ function generateBoard()
             if (getParam("games/" . $_GET["gameRoom"], "chosenPiece1") != null && $_SESSION["user"] == getParam("games/" . $_GET["gameRoom"], "player1")) {
                 $avaibleMoves = $board[getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0]][getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1]]->getAvaibleMoves(getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0], getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1], $board);
                 foreach ($avaibleMoves as $value) {
-                    echo $value[0] . $value[1] . $i . $j;
+                   
                     if ($value[0] . $value[1] == $i . $j) {
                         $specialClass = "mozliwy";
                     }
@@ -170,7 +177,7 @@ function generateBoard()
         }
     }
 
-    $html = $html . "</div>";
+   
 
     return $html;
 }
@@ -180,7 +187,7 @@ function isMovePossible($posX, $posY, $board)
     if (getParam("games/" . $_GET["gameRoom"], "chosenPiece2") != null && $_SESSION["user"] == getParam("games/" . $_GET["gameRoom"], "player2")) {
         $avaibleMoves = $board[getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[0]][getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[1]]->getAvaibleMoves(getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[0], getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[1], $board);
         foreach ($avaibleMoves as $value) {
-            echo $value[0] . $value[1] . $posX . $posY;
+            
             if ($value[0] . $value[1] == $posX . $posY) {
                 return true;
             }
@@ -196,4 +203,10 @@ function getMovesArray()
 
 
     return explode(" ", getParam("games/" . $_GET["gameRoom"], "board"));
+}
+function getNewBoard($move){
+$board2=getBoard();
+$board2[$move[2]][$move[3]]=$board2[$move[0]][$move[1]];
+$board2[$move[0]][$move[1]]=null;
+return $board2;
 }
