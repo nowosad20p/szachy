@@ -69,9 +69,16 @@ main{
 }
 #czat{
     grid-column:span 5;
-    max-height: 40vw;
+    max-height: 40vh;
     overflow: auto;
+
 }
 #tresc{
     grid-column:span 4;
+    height:2vh;
+    border:none;
+}
+#czatBtn{
+    height: 2.2vh;
+    border:none;
 }

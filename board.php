@@ -11,10 +11,23 @@ if ($_GET["mode"] == "update") {
         if (getParam("games/" . $_GET["gameRoom"], "chosenPiece1") != null) {
             if (getParam("games/" . $_GET["gameRoom"], "currentmove") == "player1") {
                 if ($board[$_GET["tresc"][0]][$_GET["tresc"][1]]->color == "black" || $board[$_GET["tresc"][0]][$_GET["tresc"][1]] == null) {
-                    if (getParam("games/" . $_GET["gameRoom"], "chosenPiece1") != $_GET["tresc"]) {
+                   
+                    
+                    $avaibleMoves = $board[getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0]][getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1]]->getAvaibleMoves(getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0], getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1], $board);
+                    foreach($avaibleMoves as $value){
+                        if($value[0].$value[1]==$_GET["tresc"]){
                         changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " " . getParam("games/" . $_GET["gameRoom"], "chosenPiece1") . $_GET["tresc"]);
                         changeParam("games/" . $_GET["gameRoom"], "currentmove", "player2");
+                   
+                        }
+                          
+                       
                     }
+                    
+                    
+                  
+                      
+                    
                 }
             }
 
@@ -33,9 +46,15 @@ if ($_GET["mode"] == "update") {
         if (getParam("games/" . $_GET["gameRoom"], "chosenPiece2") != null) {
             if (getParam("games/" . $_GET["gameRoom"], "currentmove") == "player2") {
                 if ($board[$_GET["tresc"][0]][$_GET["tresc"][1]]->color == "white" || $board[$_GET["tresc"][0]][$_GET["tresc"][1]] == null) {
-                    if (getParam("games/" . $_GET["gameRoom"], "chosenPiece2") != $_GET["tresc"]) {
+                    $avaibleMoves = $board[getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[0]][getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[1]]->getAvaibleMoves(getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[0], getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[1], $board);
+                    foreach($avaibleMoves as $value){
+                        if($value[0].$value[1]==$_GET["tresc"]){
                         changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " " . getParam("games/" . $_GET["gameRoom"], "chosenPiece2") . $_GET["tresc"]);
                         changeParam("games/" . $_GET["gameRoom"], "currentmove", "player1");
+                   
+                        }
+                          
+                       
                     }
                 }
             }
@@ -57,8 +76,15 @@ if ($_GET["mode"] == "getBoard") {
 if ($_GET["mode"] == "get") {
 
 
-
-    echo generateBoard();
+    if(getParam("games/" . $_GET["gameRoom"], "gameState")=="ongoing"){
+        echo generateBoard();
+    }
+    if(getParam("games/" . $_GET["gameRoom"], "gameState")=="preparation"){
+        echo "Oczekiwanie na drugiego gracza";
+    }
+    if(getParam("games/" . $_GET["gameRoom"], "gameState")=="finished"){
+        echo "Gra się zakończyła";
+    }
 }
 if($_GET["mode"]=="getKey"){
     echo $_GET["gameRoom"];
@@ -190,6 +216,22 @@ function isMovePossible($posX, $posY, $board)
             
             if ($value[0] . $value[1] == $posX . $posY) {
                 return true;
+            }
+        }
+    }
+    return false;
+}
+function isAnyMovePossible($color){
+    $board=getBoard();
+    for($i=0;$i<8;$i++){
+        for($j=0;$j<8;$j++){
+            if($board[$i][$j]!=null){
+                if($board[$i][$j]->color==$color){
+                    $avaibleMoves =$board[$i][$j]->getAvaibleMoves($i,$j,$board);
+                     if(count($avaibleMoves)>0){
+                         return true;
+                     }
+                }
             }
         }
     }

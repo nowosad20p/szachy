@@ -17,7 +17,7 @@
     }
     $file = fopen("games/" . $fileName, "c");
     fopen("chats/" . $fileName."-chat", "c");
-    fwrite($file, "player1:\nplayer2:\nboard:\ncurrentmove:player1\nchosenPiece1:\nchosenPiece2:");
+    fwrite($file, "player1:\nplayer2:\nboard:\ncurrentmove:player1\nchosenPiece1:\nchosenPiece2:\ngameState:preparation");
     header("Location:game.php?gameRoom=" . $fileName);
     ?>
 </body>

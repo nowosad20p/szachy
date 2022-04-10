@@ -157,6 +157,7 @@
     } else {
         if (is_null($player2) || trim($player2) == $_SESSION["user"]) {
             changeParam("games/" . $_GET["gameRoom"], "player2", $_SESSION["user"]);
+            changeParam("games/" . $_GET["gameRoom"], "gameState", "ongoing");
         } else {
 
            
