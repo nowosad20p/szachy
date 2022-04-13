@@ -6,28 +6,25 @@ require("chessPieces.php");
 $board = getBoard();
 
 if ($_GET["mode"] == "update") {
+    if(getParam("games/" . $_GET["gameRoom"], "gameState")=="ongoing"){
     if (getParam("games/" . $_GET["gameRoom"], "player1") == $_SESSION["user"]) {
-
+      
         if (getParam("games/" . $_GET["gameRoom"], "chosenPiece1") != null) {
             if (getParam("games/" . $_GET["gameRoom"], "currentmove") == "player1") {
                 if ($board[$_GET["tresc"][0]][$_GET["tresc"][1]]->color == "black" || $board[$_GET["tresc"][0]][$_GET["tresc"][1]] == null) {
                    
-                    
+                    $king=getKing("white");
                     $avaibleMoves = $board[getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0]][getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1]]->getAvaibleMoves(getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0], getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1], $board);
                     foreach($avaibleMoves as $value){
                         if($value[0].$value[1]==$_GET["tresc"]){
+                           
+                       if(!$king[2]->isChecked($king[0],$king[1],getNewBoard(getParam("games/" . $_GET["gameRoom"], "chosenPiece1") . $_GET["tresc"]))){
                         changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " " . getParam("games/" . $_GET["gameRoom"], "chosenPiece1") . $_GET["tresc"]);
+                        
                         changeParam("games/" . $_GET["gameRoom"], "currentmove", "player2");
-                   
+                       }
                         }
-                          
-                       
-                    }
-                    
-                    
-                  
-                      
-                    
+                    }                   
                 }
             }
 
@@ -70,8 +67,30 @@ if ($_GET["mode"] == "update") {
         }
     }
 }
+    if(!isAnyMovePossible("white")||!isAnyMovePossible("black")){
+        changeParam("games/".$_GET["gameRoom"],"gameState","finished");
+    }
+}
 if ($_GET["mode"] == "getBoard") {
-    echo getParam("games/" . $_GET["gameRoom"], "board");
+    if($_SESSION["user"]==getParam("games/".$_GET["gameRoom"],"player1")){
+    if(getParam("games/".$_GET["gameRoom"],"worthToUpdate1")=="true"){
+        echo getParam("games/" . $_GET["gameRoom"], "board");
+        changeParam("games/".$_GET["gameRoom"],"worthToUpdate1","false");
+    }else{
+        changeParam("games/".$_GET["gameRoom"],"worthToUpdate1","true");
+      
+    }
+}else{
+   
+        if(getParam("games/".$_GET["gameRoom"],"worthToUpdate2")=="true"){
+            echo getParam("games/" . $_GET["gameRoom"], "board");
+            changeParam("games/".$_GET["gameRoom"],"worthToUpdate2","false");
+        }else{
+            changeParam("games/".$_GET["gameRoom"],"worthToUpdate2","true");
+          
+        }
+
+}
 }
 if ($_GET["mode"] == "get") {
 
@@ -88,6 +107,24 @@ if ($_GET["mode"] == "get") {
 }
 if($_GET["mode"]=="getKey"){
     echo $_GET["gameRoom"];
+}
+function getKing($color){
+    $result=[null,null,null];
+    $board=getBoard();
+    for($i=0;$i<8;$i++){
+        for($j=0;$j<8;$j++){
+            if($board[$i][$j] instanceof King){
+                if($board[$i][$j]->color==$color){
+                    $result[0]=$i;
+                    $result[1]=$j;
+                    $result[2]=$board[$i][$j];
+                    return $result;
+                }
+            }
+        }
+    }
+
+    return null;
 }
 function getBoard()
 {

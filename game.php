@@ -126,7 +126,7 @@
 
                     if (xhrr.status === 200) {
                         let data = xhrr.response;
-                        if (data != board) {
+                        if (data != null) {
                             board = data
                             setBoard()
                         }
@@ -137,8 +137,8 @@
             }
             xhrr.send();
         }
-        setInterval(getBoard, 1000)
-        setInterval(getChat, 1000)
+        setInterval(getBoard, 10000)
+        //setInterval(getChat, 1000)
     </script>
 
     <?php

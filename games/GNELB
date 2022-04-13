@@ -1,0 +1,10 @@
+player1:test
+player2:ae
+board:3133 4644
+currentmove:player1
+chosenPiece1:30
+chosenPiece2:
+gameState:ongoing
+worthToUpdate1:true
+worthToUpdate2:true
+roomStatus:private

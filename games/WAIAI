@@ -1,7 +1,9 @@
 player1:test
 player2:ae
-board:4143 3634 4042 5654 4334 6755
-currentmove:player1
+board: 3133
+currentmove:player2
 chosenPiece1:
 chosenPiece2:
 gameState:ongoing
+worthToUpdate:true
+roomStatus:private
