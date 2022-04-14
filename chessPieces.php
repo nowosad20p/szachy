@@ -377,8 +377,78 @@ class King extends ChessPiece
     public function getAvaibleMoves($positionX, $positionY, $board)
     {
         $avaibleMoves = [];
-       
+        if($positionY+1<8){
+            if($board[$positionX][$positionY+1]!=null){
+                if($board[$positionX][$positionY+1]->color!=$this->color){
         array_push($avaibleMoves, [$positionX, $positionY+1]);
+                }
+            }else{
+                array_push($avaibleMoves, [$positionX, $positionY+1]); 
+            }
+        }
+        if($positionY-1>=0){
+            if($board[$positionX][$positionY-1]!=null){
+                if($board[$positionX][$positionY-1]->color!=$this->color){
+        array_push($avaibleMoves, [$positionX, $positionY-1]);
+                }
+            }else{
+                array_push($avaibleMoves, [$positionX, $positionY-1]); 
+            }
+        }
+        if($positionX-1>=0){
+            if($board[$positionX-1][$positionY]!=null){
+                if($board[$positionX-1][$positionY]->color!=$this->color){
+        array_push($avaibleMoves, [$positionX-1, $positionY]);
+                }
+            }else{
+                array_push($avaibleMoves, [$positionX-1, $positionY]); 
+            }
+        }
+        if($positionX+1<8){
+            if($board[$positionX+1][$positionY]!=null){
+                if($board[$positionX+1][$positionY]->color!=$this->color){
+        array_push($avaibleMoves, [$positionX+1, $positionY]);
+                }
+            }else{
+                array_push($avaibleMoves, [$positionX+1, $positionY]); 
+            }
+        }
+        if($positionX+1<8&&$positionY+1<8){
+            if($board[$positionX+1][$positionY+1]!=null){
+                if($board[$positionX+1][$positionY+1]->color!=$this->color){
+                    array_push($avaibleMoves, [$positionX+1, $positionY+1]);
+                }
+            }else{
+                array_push($avaibleMoves, [$positionX+1, $positionY+1]); 
+            }
+        }
+        if($positionX-1>=0&&$positionY+1<8){
+            if($board[$positionX-1][$positionY+1]!=null){
+                if($board[$positionX-1][$positionY+1]->color!=$this->color){
+                    array_push($avaibleMoves, [$positionX-1, $positionY+1]);
+                }
+            }else{
+                array_push($avaibleMoves, [$positionX-1, $positionY+1]); 
+            }
+        }
+        if($positionX-1>=0&&$positionY-1>=0){
+            if($board[$positionX-1][$positionY-1]!=null){
+                if($board[$positionX-1][$positionY-1]->color!=$this->color){
+                    array_push($avaibleMoves, [$positionX-1, $positionY-1]);
+                }
+            }else{
+                array_push($avaibleMoves, [$positionX-1, $positionY-1]); 
+            }
+        }
+        if($positionX+1<8&&$positionY-1>=0){
+            if($board[$positionX+1][$positionY-1]!=null){
+                if($board[$positionX+1][$positionY-1]->color!=$this->color){
+                    array_push($avaibleMoves, [$positionX+1, $positionY-1]);
+                }
+            }else{
+                array_push($avaibleMoves, [$positionX+1, $positionY-1]); 
+            }
+        }
         return $avaibleMoves;
     }
     public function isChecked($positionX, $positionY, $board)
