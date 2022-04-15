@@ -1,0 +1,10 @@
+player1:test
+player2:ae
+board:3133 4644 3334 4443 5152 4352 4152 5713 3041 4757 4130 5747 2122 4741 3041
+currentmove:player2
+chosenPiece1:
+chosenPiece2:
+gameState:ongoing
+worthToUpdate1:true
+worthToUpdate2:true
+roomStatus:private

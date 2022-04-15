@@ -14,15 +14,20 @@ if ($_GET["mode"] == "update") {
                 if ($board[$_GET["tresc"][0]][$_GET["tresc"][1]]->color == "black" || $board[$_GET["tresc"][0]][$_GET["tresc"][1]] == null) {
                    
                     $king=getKing("white");
+                    if($board[getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0]][getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1]] instanceof King){
+                        $king[0]=$_GET["tresc"][0];
+                        $king[1]=$_GET["tresc"][1];
+                        
+                    }
                     $avaibleMoves = $board[getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0]][getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1]]->getAvaibleMoves(getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0], getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1], $board);
                     foreach($avaibleMoves as $value){
                         if($value[0].$value[1]==$_GET["tresc"]){
-                           
-                       if(!$king[2]->isChecked($king[0],$king[1],getNewBoard(getParam("games/" . $_GET["gameRoom"], "chosenPiece1") . $_GET["tresc"]))){
+                           $move=[getParam("games/" . $_GET["gameRoom"], "chosenPiece1") . $_GET["tresc"]];
+                            if(!$king[2]->isChecked($king[0],$king[1],makeMoves(getBoard(),$move))){
                         changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " " . getParam("games/" . $_GET["gameRoom"], "chosenPiece1") . $_GET["tresc"]);
                         
                         changeParam("games/" . $_GET["gameRoom"], "currentmove", "player2");
-                       }
+                            }
                         }
                     }                   
                 }
@@ -125,6 +130,9 @@ function getKing($color){
     }
 
     return null;
+}
+function isMoveLegal($color,$move){
+
 }
 function getBoard()
 {
@@ -258,6 +266,7 @@ function isMovePossible($posX, $posY, $board)
     }
     return false;
 }
+
 function isAnyMovePossible($color){
     $board=getBoard();
     for($i=0;$i<8;$i++){
@@ -283,9 +292,4 @@ function getMovesArray()
 
     return explode(" ", getParam("games/" . $_GET["gameRoom"], "board"));
 }
-function getNewBoard($move){
-$board=getBoard();
-$board[$move[2]][$move[3]]=$board[$move[0]][$move[1]];
-$board[$move[0]][$move[1]]=null;
-return $board;
-}
+
