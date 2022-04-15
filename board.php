@@ -284,8 +284,8 @@ function getMovesArray()
     return explode(" ", getParam("games/" . $_GET["gameRoom"], "board"));
 }
 function getNewBoard($move){
-$board2=getBoard();
-$board2[$move[2]][$move[3]]=$board2[$move[0]][$move[1]];
-$board2[$move[0]][$move[1]]=null;
-return $board2;
+$board=getBoard();
+$board[$move[2]][$move[3]]=$board[$move[0]][$move[1]];
+$board[$move[0]][$move[1]]=null;
+return $board;
 }

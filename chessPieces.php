@@ -1,5 +1,14 @@
 <?php
-
+function removeIllegalMoves($color,$positionX,$positionY,$moves){
+    $king=getKing($color);
+    $legalMoves=[];
+    foreach($moves as $value){
+        
+            array_push($legalMoves,$value);
+        
+    }
+    return $legalMoves;
+}
 abstract class ChessPiece
 {
 
@@ -51,7 +60,7 @@ class Pawn extends ChessPiece
                 }
             }
         }
-        return $avaibleMoves;
+        return removeIllegalMoves($this->color,$positionX,$positionY,$avaibleMoves);
     }
 }
 class Knight extends ChessPiece
