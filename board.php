@@ -299,8 +299,10 @@ function isAnyMovePossible($color){
             if($board[$i][$j]!=null){
                 if($board[$i][$j]->color==$color){
                     $avaibleMoves =$board[$i][$j]->getAvaibleMoves($i,$j,$board);
-                     if(count($avaibleMoves)>0){
-                         return true;
+                     foreach($avaibleMoves as $value){
+                         if(isMoveLegal($color,$i.$j.$value[0].$value[1])){
+                             return true;
+                         }
                      }
                 }
             }

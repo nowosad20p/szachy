@@ -5,7 +5,7 @@ while ($line = fgets($users)) {
 
 
 
-    if ($_SESSION["login"] == trim(explode(" ", $line)[0])) {
+    if ($_SESSION["user"] == trim(explode(" ", $line)[0])) {
         if (password_verify(trim($_SESSION["password"]), trim(explode(" ", $line)[1]))) {
             
             
