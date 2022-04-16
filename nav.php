@@ -4,7 +4,7 @@
     <li>Strona główna</li>
     <li><a href="gameForm.php">Graj</a></li>
     <li>Kontakt</li>
-    <li>
+    <li><a href="login.php">
     <?php
 
     ob_start();
@@ -16,6 +16,7 @@
     }
     
     ?>
+    </a>
    </li>
     </ul>
 </nav>

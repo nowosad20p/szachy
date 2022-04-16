@@ -13,21 +13,16 @@ if ($_GET["mode"] == "update") {
             if (getParam("games/" . $_GET["gameRoom"], "currentmove") == "player1") {
                 if ($board[$_GET["tresc"][0]][$_GET["tresc"][1]]->color == "black" || $board[$_GET["tresc"][0]][$_GET["tresc"][1]] == null) {
                    
-                    $king=getKing("white");
-                    if($board[getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0]][getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1]] instanceof King){
-                        $king[0]=$_GET["tresc"][0];
-                        $king[1]=$_GET["tresc"][1];
-                        
-                    }
+                    
                     $avaibleMoves = $board[getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0]][getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1]]->getAvaibleMoves(getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0], getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1], $board);
                     foreach($avaibleMoves as $value){
                         if($value[0].$value[1]==$_GET["tresc"]){
-                           $move=[getParam("games/" . $_GET["gameRoom"], "chosenPiece1") . $_GET["tresc"]];
-                            if(!$king[2]->isChecked($king[0],$king[1],makeMoves(getBoard(),$move))){
+                           $move=getParam("games/" . $_GET["gameRoom"], "chosenPiece1") . $_GET["tresc"];
+                           if(isMoveLegal("white",$move)){
                         changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " " . getParam("games/" . $_GET["gameRoom"], "chosenPiece1") . $_GET["tresc"]);
                         
                         changeParam("games/" . $_GET["gameRoom"], "currentmove", "player2");
-                            }
+                           }
                         }
                     }                   
                 }
@@ -132,7 +127,20 @@ function getKing($color){
     return null;
 }
 function isMoveLegal($color,$move){
-
+    $king=getKing($color);
+    $board=getBoard();
+    
+    if($board[$move[0]][$move[1]] instanceof King){
+        $king[0]=$move[2];
+        $king[1]=$move[3];
+        
+    }
+    
+    
+    if(!$king[2]->isChecked($king[0],$king[1],makeMoves(getBoard(),[$move]))){
+        return true;
+    }
+    return false;
 }
 function getBoard()
 {
@@ -292,4 +300,12 @@ function getMovesArray()
 
     return explode(" ", getParam("games/" . $_GET["gameRoom"], "board"));
 }
-
+function removeIllegalMoves($color,$positionX,$positionY,$moves){
+    $legalMoves=[];
+    foreach($moves as $value){
+        if(isMoveLegal($color,$positionX.$positionY.$positionX.$positionY+1)){
+            array_push($legalMoves,$value);
+        }
+    }
+    return $legalMoves;
+}

@@ -4,7 +4,7 @@ abstract class ChessPiece
 {
 
     public $color;
-
+   
     function __construct($color)
     {
 
@@ -51,6 +51,7 @@ class Pawn extends ChessPiece
                 }
             }
         }
+       
         return $avaibleMoves;
      
     }

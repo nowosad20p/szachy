@@ -14,19 +14,9 @@
     <?php
     require_once("nav.php");
     ob_start();
-    session_start();
-    if (isset($_SESSION["user"])) {
-        echo '<form action="createGame.php">
-        <input type="submit" value="Stwórz grę" name="createGameBtn">
-    </form>
-    <form action="joinGame.php" method="GET">
-    <input type="text" name="joinGameCode">
-    <input type="submit" value="Dołącz do gry" name="joinGameBtn">
-    </form>';
-    } else {
-        echo '<form action="login.php"><input type="submit" value="zaloguj się" name="zalogujBtn"></form>  <form action="signup.php"><input type="submit" value="zarejestruj się" name="zarejestrujBtn"></form>';
-    }
+    session_start();        
     ?>
+    <a href="gameForm.php"><button>Zagraj</button></a>
 </body>
 
 </html>
