@@ -1,6 +1,7 @@
 <?php
 ob_start();
 session_start();
+//include("validateUser.php");
 require_once("functions.php");
 require("chessPieces.php");
 $board = getBoard();
@@ -46,9 +47,10 @@ if ($_GET["mode"] == "update") {
                     $avaibleMoves = $board[getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[0]][getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[1]]->getAvaibleMoves(getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[0], getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[1], $board);
                     foreach($avaibleMoves as $value){
                         if($value[0].$value[1]==$_GET["tresc"]){
+                            if(isMoveLegal("black",$move)){
                         changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " " . getParam("games/" . $_GET["gameRoom"], "chosenPiece2") . $_GET["tresc"]);
                         changeParam("games/" . $_GET["gameRoom"], "currentmove", "player1");
-                   
+                                }
                         }
                           
                        
@@ -233,17 +235,11 @@ function generateBoard()
             if (trim($i . "" . $j) == trim(getParam("games/" . $_GET["gameRoom"], "chosenPiece2")) && $_SESSION["user"] == getParam("games/" . $_GET["gameRoom"], "player2")) {
                 $specialClass = "aktywny";
             }
-            if (getParam("games/" . $_GET["gameRoom"], "chosenPiece1") != null && $_SESSION["user"] == getParam("games/" . $_GET["gameRoom"], "player1")) {
-                $avaibleMoves = $board[getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0]][getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1]]->getAvaibleMoves(getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0], getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1], $board);
-                foreach ($avaibleMoves as $value) {
-                   
-                    if ($value[0] . $value[1] == $i . $j) {
-                        $specialClass = "mozliwy";
-                    }
-                }
+            if (isMovePossible("white",$i, $j, $board)) {
+                $specialClass = "mozliwy";
             }
-
-            if (isMovePossible($i, $j, $board)) {
+           
+            if (isMovePossible("black",$i, $j, $board)) {
                 $specialClass = "mozliwy";
             }
             if (($licznik + $j) % 2 == 0) {
@@ -261,14 +257,35 @@ function generateBoard()
     return $html;
 }
 
-function isMovePossible($posX, $posY, $board)
+function isMovePossible($color,$posX, $posY, $board)
 {
+    if($color=="black"){
     if (getParam("games/" . $_GET["gameRoom"], "chosenPiece2") != null && $_SESSION["user"] == getParam("games/" . $_GET["gameRoom"], "player2")) {
         $avaibleMoves = $board[getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[0]][getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[1]]->getAvaibleMoves(getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[0], getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[1], $board);
         foreach ($avaibleMoves as $value) {
-            
             if ($value[0] . $value[1] == $posX . $posY) {
-                return true;
+            
+                if(isMoveLegal($color,getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[0]. getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[1].$posX . $posY)){
+                    return true;
+                    }
+            
+        }
+        }
+    }
+    }
+    if($color=="white"){
+        if (getParam("games/" . $_GET["gameRoom"], "chosenPiece1") != null && $_SESSION["user"] == getParam("games/" . $_GET["gameRoom"], "player1")) {
+            $avaibleMoves = $board[getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0]][getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1]]->getAvaibleMoves(getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0], getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1], $board);
+            foreach ($avaibleMoves as $value) {
+               
+                if ($value[0] . $value[1] == $posX . $posY) {
+                    
+                    
+                        if(isMoveLegal($color,getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[0]. getParam("games/" . $_GET["gameRoom"], "chosenPiece1")[1].$posX . $posY)){
+                        return true;
+                        }
+                    
+                }
             }
         }
     }
