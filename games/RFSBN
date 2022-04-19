@@ -1,0 +1,11 @@
+player1:ae
+player2:test
+board:3133 3634 2053 2624 1022 5655 6665 5554 4031 6564 4142 2423 5041 4644 6052 7674 4453 1615 3060 7050 2736 4243 1725 4344 4445 4745 5264 5766 2214 6755 1435 3767 7757
+currentmove:player1
+chosenPiece1:
+chosenPiece2:
+gameState:ongoing
+worthToUpdate1:true
+worthToUpdate2:false
+winner:
+roomStatus:public

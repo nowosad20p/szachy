@@ -21,7 +21,14 @@ if ($_GET["mode"] == "update") {
                            $move=getParam("games/" . $_GET["gameRoom"], "chosenPiece1") . $_GET["tresc"];
                            if(isMoveLegal("white",$move)){
                         changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " " . getParam("games/" . $_GET["gameRoom"], "chosenPiece1") . $_GET["tresc"]);
-                        
+                        if($board[$move[0]][$move[1]]instanceof King){
+                            if($move[0]-$move[2]>1){
+                                changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " 0020");
+                            }
+                            if($move[0]-$move[2]==-3){
+                                changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " 7050");
+                            }
+                        }
                         changeParam("games/" . $_GET["gameRoom"], "currentmove", "player2");
                            }
                         }
@@ -50,6 +57,14 @@ if ($_GET["mode"] == "update") {
                             $move=getParam("games/" . $_GET["gameRoom"], "chosenPiece2") . $_GET["tresc"];
                             if(isMoveLegal("black",$move)){
                         changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " " . getParam("games/" . $_GET["gameRoom"], "chosenPiece2") . $_GET["tresc"]);
+                        if($board[$move[0]][$move[1]]instanceof King){
+                            if($move[0]-$move[2]>1){
+                                changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " 0727");
+                            }
+                            if($move[0]-$move[2]==-3){
+                                changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " 7757");
+                            }
+                        }
                         changeParam("games/" . $_GET["gameRoom"], "currentmove", "player1");
                                 }
                         }
@@ -70,8 +85,24 @@ if ($_GET["mode"] == "update") {
         }
     }
 }
-    if(!isAnyMovePossible("white")||!isAnyMovePossible("black")){
+    
+    if(!isAnyMovePossible("white")){
+        if(getKing("white")[2]->isChecked(getKing("white")[0],getKing("white")[1],getBoard())){
         changeParam("games/".$_GET["gameRoom"],"gameState","finished");
+        changeParam("games/".$_GET["gameRoom"],"winner","black");
+        }else{
+            changeParam("games/".$_GET["gameRoom"],"gameState","finished");
+        changeParam("games/".$_GET["gameRoom"],"winner","draw");
+        }
+    }
+    if(!isAnyMovePossible("black")){
+        if(getKing("black")[2]->isChecked(getKing("black")[0],getKing("black")[1],getBoard())){
+            changeParam("games/".$_GET["gameRoom"],"gameState","finished");
+            changeParam("games/".$_GET["gameRoom"],"winner","white");
+            }else{
+                changeParam("games/".$_GET["gameRoom"],"gameState","finished");
+            changeParam("games/".$_GET["gameRoom"],"winner","draw");
+            }
     }
 }
 if ($_GET["mode"] == "getBoard") {
@@ -106,6 +137,11 @@ if ($_GET["mode"] == "get") {
     }
     if(getParam("games/" . $_GET["gameRoom"], "gameState")=="finished"){
         echo "Gra się zakończyła";
+        if(getParam("games/" . $_GET["gameRoom"], "winner")=="draw"){
+            echo " remisem";
+        }else{
+            echo ". Wygrał ".getParam("games/".$_GET["gameRoom"],"winner");
+        }
     }
 }
 if($_GET["mode"]=="getKey"){
@@ -195,6 +231,20 @@ function makeMoves($board,$moves){
         }
     }
     return $board;
+}
+function havePieceMoved($positionX,$positionY){
+    $moves=getMovesArray();
+    if($moves!=null){
+    foreach($moves as $value){
+        if($value[0].$value[1]==$positionX.$positionY){
+            return true;
+        }
+        if($value[2].$value[3]==$positionX.$positionY){
+            return true;
+        }
+    }
+}
+    return false;
 }
 function generateBoard()
 {

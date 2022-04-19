@@ -451,7 +451,39 @@ class King extends ChessPiece
                 array_push($avaibleMoves, [$positionX+1, $positionY-1]); 
             }
         }
-      
+    
+        if($this->color=="white"){
+           if(!havePieceMoved(3,0)){
+               $board=getBoard();
+               if($board[2][0]==null&&$board[1][0]==null){
+                if(!havePieceMoved(0,0)){
+                    array_push($avaibleMoves, [1, 0]); 
+                   }
+               }
+               if($board[4][0]==null&&$board[5][0]==null&&$board[6][0]==null){
+                if(!havePieceMoved(7,0)){
+                    array_push($avaibleMoves, [6, 0]); 
+                   }
+               }
+           }
+           
+        }
+        if($this->color=="black"){
+            if(!havePieceMoved(3,7)){
+                $board=getBoard();
+                if($board[2][0]==null&&$board[1][7]==null){
+                 if(!havePieceMoved(0,7)){
+                     array_push($avaibleMoves, [1, 7]); 
+                    }
+                }
+                if($board[4][7]==null&&$board[5][7]==null&&$board[6][7]==null){
+                 if(!havePieceMoved(7,7)){
+                     array_push($avaibleMoves, [6, 7]); 
+                    }
+                }
+            }
+            
+         }
         return $avaibleMoves;
     }
     public function isChecked($positionX, $positionY, $board)
