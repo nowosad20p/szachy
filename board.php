@@ -1,12 +1,14 @@
 <?php
 ob_start();
 session_start();
-//include("validateUser.php");
+include("validateUser.php");
 require_once("functions.php");
 require("chessPieces.php");
 $board = getBoard();
 
 if ($_GET["mode"] == "update") {
+    if(getParam("games/" . $_GET["gameRoom"], "isWaitingForPieceChoice")[0]!="t"){
+        
     if(getParam("games/" . $_GET["gameRoom"], "gameState")=="ongoing"){
     if (getParam("games/" . $_GET["gameRoom"], "player1") == $_SESSION["user"]) {
       
@@ -29,7 +31,16 @@ if ($_GET["mode"] == "update") {
                                 changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " 7050");
                             }
                         }
-                        changeParam("games/" . $_GET["gameRoom"], "currentmove", "player2");
+                        
+                               
+                                
+                            
+                        if($board[$move[0]][$move[1]]instanceof Pawn&&($move[3]==0||$move[3]==7)){
+                            changeParam("games/" . $_GET["gameRoom"], "isWaitingForPieceChoice", "t".$move[2].$move[3]."1");
+                        }else{
+                            changeParam("games/" . $_GET["gameRoom"], "currentmove", "player2");
+                        }
+                       
                            }
                         }
                     }                   
@@ -45,7 +56,9 @@ if ($_GET["mode"] == "update") {
                 }
             }
         }
+    
     }
+        }
     if (getParam("games/" . $_GET["gameRoom"], "player2") == $_SESSION["user"]) {
 
         if (getParam("games/" . $_GET["gameRoom"], "chosenPiece2") != null) {
@@ -65,7 +78,12 @@ if ($_GET["mode"] == "update") {
                                 changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " 7757");
                             }
                         }
-                        changeParam("games/" . $_GET["gameRoom"], "currentmove", "player1");
+                        
+                        if($board[$move[0]][$move[1]]instanceof Pawn&&($move[3]==0||$move[3]==7)){
+                            changeParam("games/" . $_GET["gameRoom"], "isWaitingForPieceChoice", "t".$move[2].$move[3]."2");
+                        }else{
+                            changeParam("games/" . $_GET["gameRoom"], "currentmove", "player1");
+                        }
                                 }
                         }
                           
@@ -84,7 +102,7 @@ if ($_GET["mode"] == "update") {
             }
         }
     }
-}
+
     
     if(!isAnyMovePossible("white")){
         if(getKing("white")[2]->isChecked(getKing("white")[0],getKing("white")[1],getBoard())){
@@ -104,6 +122,20 @@ if ($_GET["mode"] == "update") {
             changeParam("games/".$_GET["gameRoom"],"winner","draw");
             }
     }
+}else{
+    if(isset($_GET["choice"])){
+
+        
+        changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " ".$_GET["choice"].getParam("games/" . $_GET["gameRoom"], "isWaitingForPieceChoice")[1].getParam("games/" . $_GET["gameRoom"], "isWaitingForPieceChoice")[2]);
+        if(getParam("games/" . $_GET["gameRoom"],"isWaitingForPieceChoice")[3]=="1"){
+            changeParam("games/" . $_GET["gameRoom"], "currentmove", "player2");
+        }else{
+            changeParam("games/" . $_GET["gameRoom"], "currentmove", "player1");
+        }
+        changeParam("games/" . $_GET["gameRoom"], "isWaitingForPieceChoice", "false");
+        
+    }
+}
 }
 if ($_GET["mode"] == "getBoard") {
     if($_SESSION["user"]==getParam("games/".$_GET["gameRoom"],"player1")){
@@ -131,6 +163,12 @@ if ($_GET["mode"] == "get") {
 
     if(getParam("games/" . $_GET["gameRoom"], "gameState")=="ongoing"){
         echo generateBoard();
+        if((getParam("games/" . $_GET["gameRoom"], "isWaitingForPieceChoice")[3]=="1"&&$_SESSION["user"]==getParam("games/" . $_GET["gameRoom"], "player1"))||(getParam("games/" . $_GET["gameRoom"], "isWaitingForPieceChoice")[3]=="2"&&$_SESSION["user"]==getParam("games/" . $_GET["gameRoom"], "player2"))){
+        if(getParam("games/" . $_GET["gameRoom"], "isWaitingForPieceChoice")!="false"){
+            echo "<span class='pieceChoice'><div style=background-image:url('images/whiteRook.png')></div><div style=background-image:url('images/whiteBishop.png')></div><div style=background-image:url('images/whiteKnight.png')></div><div style=background-image:url('images/whiteQueen.png')></div></span>";
+            
+        }
+    }
     }
     if(getParam("games/" . $_GET["gameRoom"], "gameState")=="preparation"){
         echo "Oczekiwanie na drugiego gracza";
@@ -226,22 +264,44 @@ function makeMoves($board,$moves){
   
     if ($moves != null) {
         foreach ($moves as $value) {
+            if(is_numeric($value[0])){
             $board[$value[2]][$value[3]] = $board[$value[0]][$value[1]];
             $board[$value[0]][$value[1]] = null;
+            }else{
+                $color=$board[$value[1]][$value[2]]->color;
+                switch($value[0]){
+                    case "Q":
+                        $board[$value[1]][$value[2]]=new Queen($color);
+                        break;
+                    case "B":
+                        $board[$value[1]][$value[2]]=new Bishop($color);
+                        break;
+                    case "K":
+                       
+                        $board[$value[1]][$value[2]]=new Knight($color);
+                        break;
+                    case "R":
+                        $board[$value[1]][$value[2]]=new Rook($color);
+                        break;
+                }
+            }
         }
     }
+
     return $board;
 }
 function havePieceMoved($positionX,$positionY){
     $moves=getMovesArray();
     if($moves!=null){
     foreach($moves as $value){
+        if(is_numeric($value[0])){
         if($value[0].$value[1]==$positionX.$positionY){
             return true;
         }
         if($value[2].$value[3]==$positionX.$positionY){
             return true;
         }
+    }
     }
 }
     return false;

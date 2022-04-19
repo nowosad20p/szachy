@@ -5,7 +5,7 @@ currentmove:player1
 chosenPiece1:
 chosenPiece2:
 gameState:ongoing
-worthToUpdate1:true
+worthToUpdate1:false
 worthToUpdate2:false
 winner:
 roomStatus:public

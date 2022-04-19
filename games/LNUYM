@@ -1,0 +1,12 @@
+player1:ae
+player2:test
+board:3133 3634 K00 0012 0001 0001 0001 Q10 5654 4143 4644 3344 4714 4445 5735 4546 3736 5453 4647 Q47 4757 6664 6162 5362 6052 6271 7060 4344 7170 Q70
+currentmove:player1
+chosenPiece1:
+chosenPiece2:
+gameState:ongoing
+worthToUpdate1:false
+worthToUpdate2:true
+isWaitingForPieceChoice:false
+winner:
+roomStatus:public

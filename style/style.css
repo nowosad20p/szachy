@@ -21,6 +21,20 @@ body{
 
    
 }
+.pieceChoice{
+    grid-column: 8;
+    display:flex;
+    justify-content: space-around;
+    position:absolute;
+}
+.pieceChoice>div{
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 10vw;
+    height: 10vw;
+  
+   margin-top:40vw;
+}
 main{
     display:flex;
     justify-content: space-evenly;

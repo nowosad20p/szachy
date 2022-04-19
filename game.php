@@ -89,7 +89,17 @@
 
 
         let board;
+        function sendPieceChoice($choice){
+            let xhr = new XMLHttpRequest();
 
+            xhr.open("GET", "board.php?mode=update&choice="+$choice+"&"+ (window.location.href).split("?")[1], true);
+         
+
+
+            xhr.send();
+
+            getBoard();
+        }
         function setBoard() {
             let xhr = new XMLHttpRequest();
 
@@ -106,6 +116,15 @@
                         for (i = 0; i < pola.length; i++) {
                             pola[i].addEventListener("click", updateBoard, false)
 
+                        }
+                        zamiana = document.querySelectorAll(".pieceChoice>div");
+                        if(zamiana.length>0){
+                            zamiana[0].addEventListener("click",()=>{sendPieceChoice("R")})
+                            zamiana[1].addEventListener("click",()=>{sendPieceChoice("B")})
+                            zamiana[2].addEventListener("click",()=>{sendPieceChoice("K")})
+                            zamiana[3].addEventListener("click",()=>{sendPieceChoice("Q")})
+                        }else{
+                            console.log("ni ma");
                         }
 
                     }
