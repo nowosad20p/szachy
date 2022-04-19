@@ -47,6 +47,7 @@ if ($_GET["mode"] == "update") {
                     $avaibleMoves = $board[getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[0]][getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[1]]->getAvaibleMoves(getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[0], getParam("games/" . $_GET["gameRoom"], "chosenPiece2")[1], $board);
                     foreach($avaibleMoves as $value){
                         if($value[0].$value[1]==$_GET["tresc"]){
+                            $move=getParam("games/" . $_GET["gameRoom"], "chosenPiece2") . $_GET["tresc"];
                             if(isMoveLegal("black",$move)){
                         changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " " . getParam("games/" . $_GET["gameRoom"], "chosenPiece2") . $_GET["tresc"]);
                         changeParam("games/" . $_GET["gameRoom"], "currentmove", "player1");
