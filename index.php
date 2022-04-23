@@ -13,11 +13,16 @@
 <body>
 
     <?php
-    require_once("nav.php");
+    include("nav.php");
     ob_start();
 
     ?>
-    <a href="gameForm.php"><button class="importantButton">Zagraj</button></a>
+    <a href="gameForm.php" class="playIndex"><button class="importantButton">Zagraj</button></a>
+    <?php
+    include("footer.php");
+    ob_start();
+
+    ?>
 </body>
 
 </html>
