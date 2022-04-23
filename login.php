@@ -22,7 +22,7 @@
         <input type="text" name="login">
         <label for="login">Hasło:</label>
         <input type="password" name="password">
-        <input type="submit" name="submit">
+        <input class="importantButton" type="submit" name="submit">
         <a href="signup.php">Nie masz konta? Zarejestruj się</a>
         <p>
     <?php
@@ -36,8 +36,13 @@
     }
     ?>
     </p>
-    </form>
     
+    </form>
+    <?php
+    include("footer.php");
+    ob_start();
+
+    ?>
 </body>
 
 </html>

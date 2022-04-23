@@ -22,21 +22,26 @@
         <input type="text" name="login">
         <label for="login">Hasło:</label>
         <input type="password" name="password">
-        <input type="submit" name="submit">
+        <input class="importantButton" type="submit" name="submit">
         <a href="login.php">Nie masz konta? Zaloguj się</a>
         <p>
     <?php
     if(isset($_GET["error"])){
-        if($_GET["error"]=="wrongUsername"){
-            echo "niewłaściwy login";
+        if($_GET["error"]=="usernameTaken"){
+            echo "Nazwa użykownika jest już zajęta";
         }
         if($_GET["error"]=="wrongPassword"){
-            echo "niewłaściwe hasło";
+            echo "Hasło powinno mieć 7-15 znaków";
         }
     }
     ?>
     </p>
     </form>
+    <?php
+    include("footer.php");
+    ob_start();
+
+    ?>
 </body>
 
 </html>

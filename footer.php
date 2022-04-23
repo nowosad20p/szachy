@@ -1,4 +1,4 @@
 <link rel="stylesheet" href="style/footer.css">
 <footer>
-    Szachy borze<p>Autor:Jakub Nowosad</p>
+    <p>Szachy borze</p><p>Autor:Jakub Nowosad</p>
 </footer>

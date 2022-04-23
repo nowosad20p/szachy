@@ -22,7 +22,7 @@
     }
 
     ?>
-    <h1>Graj w gre</h1>
+
     <main id="gameFormContainer">
         <form action="createGame.php">
             <h2>Stwórz grę</h2>
@@ -46,7 +46,7 @@
                     if (strlen($value) == 5) {
                         if (getParam("games/" . $value, "roomStatus") == "public") {
                             if (getParam("games/" . $value, "player1") == null || getParam("games/" . $value, "player2") == null) {
-                                echo "<li><a href=game.php?gameRoom=" . $value . ">Pokój " . $value . "  Gracz: ".getParam("games/" . $value, "player1")."</a></li>";
+                                echo "<li><a href=game.php?gameRoom=" . $value . ">Pokój " . $value . " |  Gracz: ".getParam("games/" . $value, "player1")."</a></li>";
                             }
                         }
                     }
@@ -68,9 +68,9 @@
                     if (strlen($value) == 5) {
                         if (getParam("games/" . $value, "player1") == $_SESSION["user"]||getParam("games/" . $value, "player2") == $_SESSION["user"]) {
                             if(getParam("games/" . $value, "player1") == $_SESSION["user"]){
-                            echo "<li><a href=game.php?gameRoom=" . $value . ">Pokój " . $value . "  Przeciwnik: ".getParam("games/" . $value, "player2")."</a></li>";
+                            echo "<li><a href=game.php?gameRoom=" . $value . ">Pokój " . $value . " |  Przeciwnik: ".getParam("games/" . $value, "player2")."</a></li>";
                             }else{
-                                echo "<li><a href=game.php?gameRoom=" . $value . ">Pokój " . $value . "  Przeciwnik: ".getParam("games/" . $value, "player1wD")."</a></li>";
+                                echo "<li><a href=game.php?gameRoom=" . $value . ">Pokój " . $value . " |  Przeciwnik: ".getParam("games/" . $value, "player1wD")."</a></li>";
                             }
                             
                         }
@@ -83,7 +83,11 @@
             </ul>
             <a class="refresh" href="gameForm.php">Odśwież</a>
         </div>
+      
     </main>
+    <?php
+        include("footer.php");
+        ?>
 </body>
 
 </html>

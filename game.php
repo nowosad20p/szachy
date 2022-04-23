@@ -208,6 +208,11 @@
 
 
     ?>
+    <?php
+    include("footer.php");
+    ob_start();
+
+    ?>
 </body>
 
 </html>

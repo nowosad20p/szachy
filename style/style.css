@@ -22,8 +22,8 @@ body {
   padding: 0;
 }
 #game {
-  width: 40vw;
-  height: 40vw;
+  width: 35vw;
+  height: 35vw;
 }
 .board {
   display: grid;
@@ -89,11 +89,14 @@ a {
   max-width: 100%;
 
   margin-top: 3vw;
-
+  background-color:#1a1c1a;
+  padding:30px;
+  border-radius: 15px;
 }
+
 #czat {
   grid-column: span 5;
-  height:40vw;
+  height:30vw;
   overflow: auto;
 }
 #tresc {
