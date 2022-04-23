@@ -17,7 +17,7 @@
     ob_start();
 
     ?>
-    <a href="gameForm.php"><button>Zagraj</button></a>
+    <a href="gameForm.php"><button class="importantButton">Zagraj</button></a>
 </body>
 
 </html>

@@ -2,9 +2,9 @@
 <link rel="stylesheet" href="style/navStyle.css">
 <nav>
     <ul>
-        <li>Strona główna</li>
+        <li><a href="index.php">Strona główna</a></li>
         <li><a href="gameForm.php">Graj</a></li>
-        <li>Kontakt</li>
+        <li><a>Kontakt</a></li>
         <li><a href="login.php">
                 <?php
 

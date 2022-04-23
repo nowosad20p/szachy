@@ -1,7 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&family=Outfit:wght@200&display=swap");
+.importantButton{
+  background-color: #41ba4f;
+  border-bottom:#33803c 3px solid;
+  border-right:#33803c 3px solid;
+  border-top:none;
+  border-left:none;
+  width:200px;
+  height: 50px;
+  border-radius: 10px;
+  color:#1a1c1a;
+  font-size:20px;
+  font-weight: bold;
+  margin-left:auto;
+  margin-right: auto;
+}
 body {
   font-family: "Lato", sans-serif;
-  background-color: #1f2124;
+  background-color: #292825;
   color: white;
   margin: 0;
   padding: 0;
@@ -71,12 +86,14 @@ a {
 #czatContainer {
   display: grid;
   grid-template-columns: repeat(4, 1fr) 1fr;
-  max-width: 20vw;
+  max-width: 100%;
+
   margin-top: 3vw;
+
 }
 #czat {
   grid-column: span 5;
-  max-height: 40vh;
+  height:40vw;
   overflow: auto;
 }
 #tresc {
@@ -94,6 +111,7 @@ a {
   width: 80%;
   margin-left:auto;
   margin-right: auto;
+
 }
 #gameFormContainer > form {
   margin-left: auto;

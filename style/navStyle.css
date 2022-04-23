@@ -2,11 +2,15 @@ nav>ul{
     list-style-type: none;
     display:flex;
     justify-content: space-around;
-    background-color: #131414;
+    background-color: #1c1c1b;
     margin:0;
 
 }
 nav>ul>li{
-    background-color: #131414;
+    background-color: #1c1c1b;
     padding:30px;
+}
+nav>ul>li>a{
+    font-size:25px;
+    font-weight: bold;
 }

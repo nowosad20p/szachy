@@ -12,7 +12,7 @@ while ($line = fgets($users)) {
 
 
     if ($_POST["login"] == trim(explode(" ", $line)[0])) {
-        $loginFound=true;
+        $loginFound=true; 
         if (password_verify(trim($_POST["password"]), trim(explode(" ", $line)[1]))) {
             $_SESSION["user"] = $_POST["login"];
             $_SESSION["password"] = $_POST["password"];

@@ -1,11 +1,11 @@
-player1:test
-player2:ae
-board:4143 5654 6163 7674 4354 4644 5152 7463
+player1:ae
+player2:test
+board:4143 4644
 currentmove:player1
 chosenPiece1:
 chosenPiece2:
 gameState:ongoing
-worthToUpdate1:true
+worthToUpdate1:false
 worthToUpdate2:false
 isWaitingForPieceChoice:false
 winner:
