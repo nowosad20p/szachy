@@ -8,6 +8,7 @@
     <title>Logowanie</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/formstyle.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
 </head>
 
 <body>
