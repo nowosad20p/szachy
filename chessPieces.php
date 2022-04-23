@@ -4,7 +4,7 @@ abstract class ChessPiece
 {
 
     public $color;
-   
+
     function __construct($color)
     {
 
@@ -51,9 +51,8 @@ class Pawn extends ChessPiece
                 }
             }
         }
-       
+
         return $avaibleMoves;
-     
     }
 }
 class Knight extends ChessPiece
@@ -379,118 +378,116 @@ class King extends ChessPiece
     public function getAvaibleMoves($positionX, $positionY, $board)
     {
         $avaibleMoves = [];
-        if($positionY+1<8){
-            if($board[$positionX][$positionY+1]!=null){
-                if($board[$positionX][$positionY+1]->color!=$this->color){
-        array_push($avaibleMoves, [$positionX, $positionY+1]);
+        if ($positionY + 1 < 8) {
+            if ($board[$positionX][$positionY + 1] != null) {
+                if ($board[$positionX][$positionY + 1]->color != $this->color) {
+                    array_push($avaibleMoves, [$positionX, $positionY + 1]);
                 }
-            }else{
-                array_push($avaibleMoves, [$positionX, $positionY+1]); 
+            } else {
+                array_push($avaibleMoves, [$positionX, $positionY + 1]);
             }
         }
-        if($positionY-1>=0){
-            if($board[$positionX][$positionY-1]!=null){
-                if($board[$positionX][$positionY-1]->color!=$this->color){
-        array_push($avaibleMoves, [$positionX, $positionY-1]);
+        if ($positionY - 1 >= 0) {
+            if ($board[$positionX][$positionY - 1] != null) {
+                if ($board[$positionX][$positionY - 1]->color != $this->color) {
+                    array_push($avaibleMoves, [$positionX, $positionY - 1]);
                 }
-            }else{
-                array_push($avaibleMoves, [$positionX, $positionY-1]); 
+            } else {
+                array_push($avaibleMoves, [$positionX, $positionY - 1]);
             }
         }
-        if($positionX-1>=0){
-            if($board[$positionX-1][$positionY]!=null){
-                if($board[$positionX-1][$positionY]->color!=$this->color){
-        array_push($avaibleMoves, [$positionX-1, $positionY]);
+        if ($positionX - 1 >= 0) {
+            if ($board[$positionX - 1][$positionY] != null) {
+                if ($board[$positionX - 1][$positionY]->color != $this->color) {
+                    array_push($avaibleMoves, [$positionX - 1, $positionY]);
                 }
-            }else{
-                array_push($avaibleMoves, [$positionX-1, $positionY]); 
+            } else {
+                array_push($avaibleMoves, [$positionX - 1, $positionY]);
             }
         }
-        if($positionX+1<8){
-            if($board[$positionX+1][$positionY]!=null){
-                if($board[$positionX+1][$positionY]->color!=$this->color){
-        array_push($avaibleMoves, [$positionX+1, $positionY]);
+        if ($positionX + 1 < 8) {
+            if ($board[$positionX + 1][$positionY] != null) {
+                if ($board[$positionX + 1][$positionY]->color != $this->color) {
+                    array_push($avaibleMoves, [$positionX + 1, $positionY]);
                 }
-            }else{
-                array_push($avaibleMoves, [$positionX+1, $positionY]); 
+            } else {
+                array_push($avaibleMoves, [$positionX + 1, $positionY]);
             }
         }
-        if($positionX+1<8&&$positionY+1<8){
-            if($board[$positionX+1][$positionY+1]!=null){
-                if($board[$positionX+1][$positionY+1]->color!=$this->color){
-                    array_push($avaibleMoves, [$positionX+1, $positionY+1]);
+        if ($positionX + 1 < 8 && $positionY + 1 < 8) {
+            if ($board[$positionX + 1][$positionY + 1] != null) {
+                if ($board[$positionX + 1][$positionY + 1]->color != $this->color) {
+                    array_push($avaibleMoves, [$positionX + 1, $positionY + 1]);
                 }
-            }else{
-                array_push($avaibleMoves, [$positionX+1, $positionY+1]); 
+            } else {
+                array_push($avaibleMoves, [$positionX + 1, $positionY + 1]);
             }
         }
-        if($positionX-1>=0&&$positionY+1<8){
-            if($board[$positionX-1][$positionY+1]!=null){
-                if($board[$positionX-1][$positionY+1]->color!=$this->color){
-                    array_push($avaibleMoves, [$positionX-1, $positionY+1]);
+        if ($positionX - 1 >= 0 && $positionY + 1 < 8) {
+            if ($board[$positionX - 1][$positionY + 1] != null) {
+                if ($board[$positionX - 1][$positionY + 1]->color != $this->color) {
+                    array_push($avaibleMoves, [$positionX - 1, $positionY + 1]);
                 }
-            }else{
-                array_push($avaibleMoves, [$positionX-1, $positionY+1]); 
+            } else {
+                array_push($avaibleMoves, [$positionX - 1, $positionY + 1]);
             }
         }
-        if($positionX-1>=0&&$positionY-1>=0){
-            if($board[$positionX-1][$positionY-1]!=null){
-                if($board[$positionX-1][$positionY-1]->color!=$this->color){
-                    array_push($avaibleMoves, [$positionX-1, $positionY-1]);
+        if ($positionX - 1 >= 0 && $positionY - 1 >= 0) {
+            if ($board[$positionX - 1][$positionY - 1] != null) {
+                if ($board[$positionX - 1][$positionY - 1]->color != $this->color) {
+                    array_push($avaibleMoves, [$positionX - 1, $positionY - 1]);
                 }
-            }else{
-                array_push($avaibleMoves, [$positionX-1, $positionY-1]); 
+            } else {
+                array_push($avaibleMoves, [$positionX - 1, $positionY - 1]);
             }
         }
-        if($positionX+1<8&&$positionY-1>=0){
-            if($board[$positionX+1][$positionY-1]!=null){
-                if($board[$positionX+1][$positionY-1]->color!=$this->color){
-                    array_push($avaibleMoves, [$positionX+1, $positionY-1]);
+        if ($positionX + 1 < 8 && $positionY - 1 >= 0) {
+            if ($board[$positionX + 1][$positionY - 1] != null) {
+                if ($board[$positionX + 1][$positionY - 1]->color != $this->color) {
+                    array_push($avaibleMoves, [$positionX + 1, $positionY - 1]);
                 }
-            }else{
-                array_push($avaibleMoves, [$positionX+1, $positionY-1]); 
+            } else {
+                array_push($avaibleMoves, [$positionX + 1, $positionY - 1]);
             }
         }
-    
-        if($this->color=="white"){
-           if(!havePieceMoved(3,0)){
-               $board=getBoard();
-               if($board[2][0]==null&&$board[1][0]==null){
-                if(!havePieceMoved(0,0)){
-                    array_push($avaibleMoves, [1, 0]); 
-                   }
-               }
-               if($board[4][0]==null&&$board[5][0]==null&&$board[6][0]==null){
-                if(!havePieceMoved(7,0)){
-                    array_push($avaibleMoves, [6, 0]); 
-                   }
-               }
-           }
-           
-        }
-        if($this->color=="black"){
-            if(!havePieceMoved(3,7)){
-                $board=getBoard();
-                if($board[2][0]==null&&$board[1][7]==null){
-                 if(!havePieceMoved(0,7)){
-                     array_push($avaibleMoves, [1, 7]); 
+
+        if ($this->color == "white") {
+            if (!havePieceMoved(3, 0)) {
+                $board = getBoard();
+                if ($board[2][0] == null && $board[1][0] == null) {
+                    if (!havePieceMoved(0, 0)) {
+                        array_push($avaibleMoves, [1, 0]);
                     }
                 }
-                if($board[4][7]==null&&$board[5][7]==null&&$board[6][7]==null){
-                 if(!havePieceMoved(7,7)){
-                     array_push($avaibleMoves, [6, 7]); 
+                if ($board[4][0] == null && $board[5][0] == null && $board[6][0] == null) {
+                    if (!havePieceMoved(7, 0)) {
+                        array_push($avaibleMoves, [6, 0]);
                     }
                 }
             }
-            
-         }
+        }
+        if ($this->color == "black") {
+            if (!havePieceMoved(3, 7)) {
+                $board = getBoard();
+                if ($board[2][0] == null && $board[1][7] == null) {
+                    if (!havePieceMoved(0, 7)) {
+                        array_push($avaibleMoves, [1, 7]);
+                    }
+                }
+                if ($board[4][7] == null && $board[5][7] == null && $board[6][7] == null) {
+                    if (!havePieceMoved(7, 7)) {
+                        array_push($avaibleMoves, [6, 7]);
+                    }
+                }
+            }
+        }
         return $avaibleMoves;
     }
     public function isChecked($positionX, $positionY, $board)
     {
 
-        
-        
+
+
         for ($i = 0; $i < 8; $i++) {
             for ($j = 0; $j < 8; $j++) {
                 if ($board[$j][$i] != null) {

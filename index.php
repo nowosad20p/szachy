@@ -14,7 +14,7 @@
     <?php
     require_once("nav.php");
     ob_start();
-    session_start();        
+
     ?>
     <a href="gameForm.php"><button>Zagraj</button></a>
 </body>

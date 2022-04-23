@@ -16,11 +16,11 @@
         $fileName = $fileName . chr(rand(65, 90));
     }
     $file = fopen("games/" . $fileName, "c");
-    fopen("chats/" . $fileName."-chat", "c");
-    
-    if(!isset($_GET["isGamePrivate"])){
+    fopen("chats/" . $fileName . "-chat", "c");
+
+    if (!isset($_GET["isGamePrivate"])) {
         fwrite($file, "player1:\nplayer2:\nboard:\ncurrentmove:player1\nchosenPiece1:\nchosenPiece2:\ngameState:preparation\nworthToUpdate1:true\nworthToUpdate2:true\nisWaitingForPieceChoice:false\nwinner:\nroomStatus:public");
-    }else{
+    } else {
         fwrite($file, "player1:\nplayer2:\nboard:\ncurrentmove:player1\nchosenPiece1:\nchosenPiece2:\ngameState:preparation\nworthToUpdate1:true\nworthToUpdate2:true\nisWaitingForPieceChoice:false\nwinner:\nroomStatus:private");
     }
     header("Location:game.php?gameRoom=" . $fileName);

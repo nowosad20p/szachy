@@ -1,0 +1,12 @@
+player1:test
+player2:ae
+board:4143 5654 6163 7674 4354 4644 5152 7463
+currentmove:player1
+chosenPiece1:
+chosenPiece2:
+gameState:ongoing
+worthToUpdate1:true
+worthToUpdate2:false
+isWaitingForPieceChoice:false
+winner:
+roomStatus:public

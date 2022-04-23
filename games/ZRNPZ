@@ -5,6 +5,8 @@ currentmove:player1
 chosenPiece1:
 chosenPiece2:
 gameState:preparation
-worthToUpdate1:true
+worthToUpdate1:false
 worthToUpdate2:true
+isWaitingForPieceChoice:false
+winner:
 roomStatus:public
