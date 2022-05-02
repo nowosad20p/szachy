@@ -1,11 +1,11 @@
 footer{
     width: 100%;
     background-color: #302f2e;
-   height: 75px;
+   height: 10vh;
     bottom: 0;
     text-align: center;
-    position:fixed;
-    
+    margin-top:10px;
+    display:none;
 }
 p{
     color:white;

@@ -31,8 +31,12 @@ if ($_GET["mode"] == "update") {
                                                 changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " 7050");
                                             }
                                         }
-
-
+                                        if($board[$move[0]][$move[1]] instanceof Pawn && ($move[0]-$_GET["tresc"][0]!=0)){
+                                            if($board[$_GET["tresc"][0]][$_GET["tresc"][1]]==null){
+                                                changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " N".$_GET["tresc"][0].$_GET["tresc"][1]-1);
+                                            }
+                                        }
+                                        
 
 
                                         if ($board[$move[0]][$move[1]] instanceof Pawn && ($move[3] == 0 || $move[3] == 7)) {
@@ -81,7 +85,11 @@ if ($_GET["mode"] == "update") {
                                             changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " 7757");
                                         }
                                     }
-
+                                    if($board[$move[0]][$move[1]] instanceof Pawn && ($move[0]-$_GET["tresc"][0]!=0)){
+                                        if($board[$_GET["tresc"][0]][$_GET["tresc"][1]]==null){
+                                            changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " N".$_GET["tresc"][0].$_GET["tresc"][1]+1);
+                                        }
+                                    }
                                     if ($board[$move[0]][$move[1]] instanceof Pawn && ($move[3] == 0 || $move[3] == 7)) {
                                         changeParam("games/" . $_GET["gameRoom"], "isWaitingForPieceChoice", "t" . $move[2] . $move[3] . "2");
                                     } else {
@@ -297,6 +305,9 @@ function makeMoves($board, $moves)
                     case "R":
                         $board[$value[1]][$value[2]] = new Rook($color);
                         break;
+                        case "N":
+                            $board[$value[1]][$value[2]] = null;
+                            break;
                 }
             }
         }
@@ -382,7 +393,18 @@ function generateBoard()
 
     return $html;
 }
-
+function getLastMove(){
+if(getMovesArray()==null){
+    return null;
+}
+  $a=getMovesArray()[count(getMovesArray())-1];
+  $i=1;
+    while(strlen($a)!=4){
+        $a=getMovesArray()[count(getMovesArray())-1-$i];
+        $i++;
+    }
+return $a;
+}
 function isMovePossible($color, $posX, $posY, $board)
 {
     if ($color == "black") {

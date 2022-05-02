@@ -51,7 +51,16 @@ class Pawn extends ChessPiece
                 }
             }
         }
-
+      if(getLastMove()!=null){
+          if($board[getLastMove()[2]][getLastMove()[3]]instanceof Pawn){
+            if($board[getLastMove()[2]][getLastMove()[3]]->color!=$this->color){
+                if(($positionY==3&&$this->color=="black")||($positionY==4&&$this->color=="white")){
+                    array_push($avaibleMoves,getLastMove()[2].getLastMove()[3]+$this->direction);
+                }
+               
+            }
+          }
+      }
         return $avaibleMoves;
     }
 }
@@ -469,7 +478,7 @@ class King extends ChessPiece
         if ($this->color == "black") {
             if (!havePieceMoved(3, 7)) {
                 $board = getBoard();
-                if ($board[2][0] == null && $board[1][7] == null) {
+                if ($board[2][7] == null && $board[1][7] == null) {
                     if (!havePieceMoved(0, 7)) {
                         array_push($avaibleMoves, [1, 7]);
                     }

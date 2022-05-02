@@ -62,7 +62,7 @@ input[type="checkbox"]{
   margin-right: auto;
 }
 .spisGier{
-  
+  height: 25vh;
     display: flex;
     flex-direction: column;
     width: 20vw;
@@ -76,7 +76,7 @@ input[type="checkbox"]{
   
 }
 .spisGier>ul{
-  height:15vh;
+  height:70%;
   overflow:auto;
 }
 li>a{
