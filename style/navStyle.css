@@ -1,7 +1,7 @@
 nav>ul{
     list-style-type: none;
     display:flex;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: #1c1c1b;
     margin:0;
 
@@ -9,8 +9,43 @@ nav>ul{
 nav>ul>li{
     background-color: #1c1c1b;
     padding:30px;
+    width: 25%;
 }
 nav>ul>li>a{
     font-size:25px;
     font-weight: bold;
+    color:white;
+    padding:50px;
+}
+#accountMenu{
+    font-size:25px;
+    font-weight: bold;
+    text-align: center;
+    display:none;
+}
+label{
+    font-size:25px;
+    font-weight: bold;
+    color:white;
+   
+}
+label:hover{
+    cursor: pointer;
+}
+.hiddenMenu{
+    display:none;
+  width: 100%;
+    list-style-type: none;
+}
+.hiddenMenu>li>a{
+    padding:5px;
+    width: 100%;
+    text-align: center;
+}
+
+#accountMenu:checked ~ .hiddenMenu{
+    display:block;
+}
+.hiddenMenu:checked{
+    display:block;
 }

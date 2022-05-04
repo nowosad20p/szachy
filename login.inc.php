@@ -6,25 +6,15 @@ if (!isset($_POST["submit"])) {
     header("Location:login.php");
 }
 $loginFound=false;
-$users = fopen("users.txt", "r");
-while ($line = fgets($users)) {
-
-
-
-    if ($_POST["login"] == trim(explode(" ", $line)[0])) {
-        $loginFound=true; 
-        if (password_verify(trim($_POST["password"]), trim(explode(" ", $line)[1]))) {
-            $_SESSION["user"] = $_POST["login"];
-            $_SESSION["password"] = $_POST["password"];
-            header("Location:index.php");
-        } else {
-
-
-            header("Location:login.php?error=wrongPassword");
+$users = scandir("users");
+foreach($users as $value){
+    if($value==$_POST["login"]){
+        if(password_verify($_POST["password"],trim(getParam("users/".$_POST["login"]."/accountData.txt","password")))){
+           $_SESSION["user"]=$_POST["login"];
+           header("Location:index.php?error=none");
+        }else{
+            header("Location:index.php?error=".$_POST["login"].getParam("users/".$_POST["login"]."/accountData.txt","password"));
         }
     }
 }
-if(!$loginFound){
-    header("Location:login.php?error=wrongUsername");
-}
-fclose($users);
+
