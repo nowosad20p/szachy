@@ -1,0 +1,12 @@
+player1:ae
+player2:test
+board:
+currentmove:player1
+chosenPiece1:44
+chosenPiece2:
+gameState:ongoing
+worthToUpdate1:false
+worthToUpdate2:false
+isWaitingForPieceChoice:false
+winner:
+roomStatus:public

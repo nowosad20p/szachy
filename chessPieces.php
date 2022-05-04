@@ -51,11 +51,16 @@ class Pawn extends ChessPiece
                 }
             }
         }
-      if(getLastMove()!=null){
-          if($board[getLastMove()[2]][getLastMove()[3]]instanceof Pawn){
-            if($board[getLastMove()[2]][getLastMove()[3]]->color!=$this->color){
+        $lastMove=getLastMove();
+      if($lastMove!=null){
+          if($board[$lastMove[2]][$lastMove[3]]instanceof Pawn){
+            if($board[$lastMove[2]][$lastMove[3]]->color!=$this->color){
                 if(($positionY==3&&$this->color=="black")||($positionY==4&&$this->color=="white")){
-                    array_push($avaibleMoves,getLastMove()[2].getLastMove()[3]+$this->direction);
+                    if($lastMove[1]-$lastMove[3]==-2||$lastMove[1]-$lastMove[3]==2){
+                        if($positionX+1==$lastMove[0]||$positionX-1==$lastMove[0]){
+                    array_push($avaibleMoves,$lastMove[2].($lastMove[3]+$this->direction));
+                        }
+                    }
                 }
                
             }

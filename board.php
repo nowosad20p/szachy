@@ -33,7 +33,7 @@ if ($_GET["mode"] == "update") {
                                         }
                                         if($board[$move[0]][$move[1]] instanceof Pawn && ($move[0]-$_GET["tresc"][0]!=0)){
                                             if($board[$_GET["tresc"][0]][$_GET["tresc"][1]]==null){
-                                                changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " N".$_GET["tresc"][0].$_GET["tresc"][1]-1);
+                                                changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " N".$_GET["tresc"][0].($_GET["tresc"][1]-1));
                                             }
                                         }
                                         
@@ -87,7 +87,7 @@ if ($_GET["mode"] == "update") {
                                     }
                                     if($board[$move[0]][$move[1]] instanceof Pawn && ($move[0]-$_GET["tresc"][0]!=0)){
                                         if($board[$_GET["tresc"][0]][$_GET["tresc"][1]]==null){
-                                            changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " N".$_GET["tresc"][0].$_GET["tresc"][1]+1);
+                                            changeParam("games/" . $_GET["gameRoom"], "board", getParam("games/" . $_GET["gameRoom"], "board") . " N".($_GET["tresc"][0].$_GET["tresc"][1]+1));
                                         }
                                     }
                                     if ($board[$move[0]][$move[1]] instanceof Pawn && ($move[3] == 0 || $move[3] == 7)) {
