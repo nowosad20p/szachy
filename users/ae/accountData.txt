@@ -1,1 +1,4 @@
-password:$2y$10$QK9b2ncRlyJKugHBs3DF/e2YRGG4j7jrRLiEtyHjv.OH90/sPPfPy/n
+password:$2y$10$5O7JJx1LJYulhJRcamL/0O72hk4sBXHz8BMTGd0.2eCCpiZf7FhCG
+matchesWon:1
+matchesDraw
+matchesLost:

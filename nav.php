@@ -15,7 +15,7 @@
                 } else {
                     echo "<label for='accountMenu'>".$_SESSION["user"]."</div><input type='checkbox' id='accountMenu'>";
                     echo "<ul class='hiddenMenu'>
-                    <li><a href='accountinfo.php'>Twoje konto</a></li>
+                    <li><a href='accountinfo.php?user=".$_SESSION["user"]."'>Twoje konto</a></li>
                     <li><a href='friends.php'>Znajomi</a></li>
                     <li><a href='signout.php'>Wyloguj</a></li>
                     </ul>";

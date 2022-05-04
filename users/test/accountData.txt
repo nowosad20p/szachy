@@ -1,0 +1,4 @@
+password:$2y$10$f2h7PRiH26r5bpBXj6VVyu1eXuRtHNteYakxuL5LlDEnxUBHMvDSS
+matchesWon:0
+matchesDraw:0
+matchesLost:0
