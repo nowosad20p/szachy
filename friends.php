@@ -11,12 +11,14 @@
 <body>
     <?php
     include("nav.php");
-
+    include("friendsManager.php");
+   
 
     ?>
     <main>
     <div class="addFriendSearchBar">Dodaj znajomego:<input type="text" id="name"><ul></ul></div>
     <div class="friendsList">Lista znajomych:<ul></ul></div>
+    <div class="friendInvites">Twoje zaproszenia do znajomych:<ul></ul></div>
     <div class="gameInvites">Twoje zaproszenia do gry:<ul></ul></div>
     </main>
     <script>
@@ -29,7 +31,8 @@
             request.open("GET","getPlayerNameHint.php?cur="+document.getElementById("name").value,true);
             request.onload=()=>{
                 document.querySelector(".addFriendSearchBar>ul").innerHTML=request.response;
-                
+               
+
                 
                
             }

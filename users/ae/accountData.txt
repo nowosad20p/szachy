@@ -1,4 +1,4 @@
-password:$2y$10$5O7JJx1LJYulhJRcamL/0O72hk4sBXHz8BMTGd0.2eCCpiZf7FhCG
-matchesWon:1
-matchesDraw
-matchesLost:
+password:$2y$10$Y5792SBt7BuF11W12C0d5uJ7b9ACUNAYL1YcBA7u8o29HYMdIjBH2
+matchesWon:0
+matchesDraw:0
+matchesLost:0

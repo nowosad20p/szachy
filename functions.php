@@ -35,6 +35,9 @@ function changeParam($filePath, $paramName, $paramValue)
     fwrite($file, $newFile);
     fclose($file);
 }
+function removeLine($path,$key){
+
+}
 function getParam($filePath, $paramName)
 {
     $file = fopen($filePath, "r");

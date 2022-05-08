@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-include("validateUser.php");
+
 require_once("functions.php");
 require("chessPieces.php");
 $board = getBoard();

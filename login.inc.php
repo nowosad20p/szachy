@@ -9,12 +9,17 @@ $loginFound=false;
 $users = scandir("users");
 foreach($users as $value){
     if($value==$_POST["login"]){
+        $loginFound=true;
         if(password_verify($_POST["password"],trim(getParam("users/".$_POST["login"]."/accountData.txt","password")))){
            $_SESSION["user"]=$_POST["login"];
            header("Location:index.php?error=none");
         }else{
             header("Location:index.php?error=".$_POST["login"].getParam("users/".$_POST["login"]."/accountData.txt","password"));
         }
+       
     }
+ 
 }
-
+if(!$loginFound){
+    header("Location:login.php?error=wrongUsername");
+}
