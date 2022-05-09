@@ -19,9 +19,9 @@
     fopen("chats/" . $fileName . "-chat", "c");
 
     if (!isset($_GET["isGamePrivate"])) {
-        fwrite($file, "player1:\nplayer2:\nboard:\ncurrentmove:player1\nchosenPiece1:\nchosenPiece2:\ngameState:preparation\nworthToUpdate1:true\nworthToUpdate2:true\nisWaitingForPieceChoice:false\nwinner:\nroomStatus:public");
+        fwrite($file, "player1:\nplayer2:\nboard:\ncurrentmove:player1\nchosenPiece1:\nchosenPiece2:\ngameState:preparation\nworthToUpdate1:true\nworthToUpdate2:true\nisWaitingForPieceChoice:false\nwinner:\nroomStatus:public\npunishment:");
     } else {
-        fwrite($file, "player1:\nplayer2:\nboard:\ncurrentmove:player1\nchosenPiece1:\nchosenPiece2:\ngameState:preparation\nworthToUpdate1:true\nworthToUpdate2:true\nisWaitingForPieceChoice:false\nwinner:\nroomStatus:private");
+        fwrite($file, "player1:\nplayer2:\nboard:\ncurrentmove:player1\nchosenPiece1:\nchosenPiece2:\ngameState:preparation\nworthToUpdate1:true\nworthToUpdate2:true\nisWaitingForPieceChoice:false\nwinner:\nroomStatus:private\npunishment:");
     }
     header("Location:game.php?gameRoom=" . $fileName);
     ?>

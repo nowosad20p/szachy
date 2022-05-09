@@ -14,6 +14,7 @@
 <body>
     <?php
     require_once("nav.php");
+  
     ?>
     <main>
         <div id="game">
@@ -178,7 +179,7 @@
             xhrr.send();
         }
         setInterval(getBoard, 1000)
-        //setInterval(getChat, 1000)
+        setInterval(getChat, 1000)
     </script>
 
     <?php
@@ -197,7 +198,10 @@
     } else {
         if (is_null($player2) || trim($player2) == $_SESSION["user"]) {
             changeParam("games/" . $_GET["gameRoom"], "player2", $_SESSION["user"]);
+            if(getParam("games/" . $_GET["gameRoom"], "gameState")!="finished"){
             changeParam("games/" . $_GET["gameRoom"], "gameState", "ongoing");
+            changeParam("games/" . $_GET["gameRoom"], "worthToUpdate1", "true");
+            }
         } else {
 
 

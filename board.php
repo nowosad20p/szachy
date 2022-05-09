@@ -160,18 +160,20 @@ if ($_GET["mode"] == "update") {
     }
 }
 if ($_GET["mode"] == "forceBoard") {
+   
     if($_SESSION["user"]==getParam("games/" . $_GET["gameRoom"], "player1")){
         changeParam("games/" . $_GET["gameRoom"], "worthToUpdate1","true");
     }
     if($_SESSION["user"]==getParam("games/" . $_GET["gameRoom"], "player2")){
         changeParam("games/" . $_GET["gameRoom"], "worthToUpdate2","true");
     }
+
 }
 if ($_GET["mode"] == "getBoard") {
     echo (getParam("games/" . $_GET["gameRoom"], "board"));
 }
 if ($_GET["mode"] == "get") {
-
+    if (getParam("games/" . $_GET["gameRoom"], "gameState") == "ongoing") {
     if(($_SESSION["user"]==getParam("games/" . $_GET["gameRoom"], "player1")&&getParam("games/" . $_GET["gameRoom"], "worthToUpdate1")=="true")||($_SESSION["user"]==getParam("games/" . $_GET["gameRoom"], "player2")&&getParam("games/" . $_GET["gameRoom"], "worthToUpdate2")=="true")){
         if(($_SESSION["user"]==getParam("games/" . $_GET["gameRoom"], "player1"))){
         changeParam("games/" . $_GET["gameRoom"], "worthToUpdate1","false");
@@ -179,7 +181,7 @@ if ($_GET["mode"] == "get") {
             changeParam("games/" . $_GET["gameRoom"], "worthToUpdate2","false");
         }
        
-    if (getParam("games/" . $_GET["gameRoom"], "gameState") == "ongoing") {
+
 
         echo generateBoard();
         if ((getParam("games/" . $_GET["gameRoom"], "isWaitingForPieceChoice")[3] == "1" && $_SESSION["user"] == getParam("games/" . $_GET["gameRoom"], "player1")) || (getParam("games/" . $_GET["gameRoom"], "isWaitingForPieceChoice")[3] == "2" && $_SESSION["user"] == getParam("games/" . $_GET["gameRoom"], "player2"))) {
@@ -190,16 +192,47 @@ if ($_GET["mode"] == "get") {
         }
     }
 }
+
     if (getParam("games/" . $_GET["gameRoom"], "gameState") == "preparation") {
         echo "Oczekiwanie na drugiego gracza";
     }
     if (getParam("games/" . $_GET["gameRoom"], "gameState") == "finished") {
+        if(($_SESSION["user"]==getParam("games/" . $_GET["gameRoom"], "player1")&&getParam("games/" . $_GET["gameRoom"], "worthToUpdate1")=="true")||($_SESSION["user"]==getParam("games/" . $_GET["gameRoom"], "player2")&&getParam("games/" . $_GET["gameRoom"], "worthToUpdate2")=="true")){
         echo "Gra się zakończyła";
+       
+       
+        
         if (getParam("games/" . $_GET["gameRoom"], "winner") == "draw") {
             echo " remisem";
         } else {
             echo ". Wygrał " . getParam("games/" . $_GET["gameRoom"], "winner");
         }
+        if(getParam("games/" . $_GET["gameRoom"], "winner")=="white"){
+            
+            if(getParam("games/" . $_GET["gameRoom"], "player2")==$_SESSION["user"]){
+                echo '<iframe width="420" height="345" src="http://www.youtube.com/embed/oHg5SJYRHA0?autoplay=1" frameborder="0" allowfullscreen></iframe>
+            ';
+            changeParam("games/" . $_GET["gameRoom"], "worthToUpdate2","false");
+            }else{
+              echo "<div>Wybierz karę:</div>";
+              changeParam("games/" . $_GET["gameRoom"], "worthToUpdate1","false");
+            }
+            
+        }
+        if(getParam("games/" . $_GET["gameRoom"], "winner")=="black"){
+            
+            if(getParam("games/" . $_GET["gameRoom"], "player1")==$_SESSION["user"]){
+                echo '<iframe width="420" height="345" src="http://www.youtube.com/embed/oHg5SJYRHA0?autoplay=1" frameborder="0" allowfullscreen></iframe>
+            ';
+            changeParam("games/" . $_GET["gameRoom"], "worthToUpdate1","false");
+            }else{
+              echo "<div>Wybierz karę:</div>";
+              changeParam("games/" . $_GET["gameRoom"], "worthToUpdate2","false");
+            }
+            
+        }
+    
+    }
     }
 }
 if ($_GET["mode"] == "getKey") {
