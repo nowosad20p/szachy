@@ -35,8 +35,19 @@ function changeParam($filePath, $paramName, $paramValue)
     fwrite($file, $newFile);
     fclose($file);
 }
-function removeLine($path,$key){
+function removeLine($path,$value){
+$file=fopen($path,"r+");
 
+$newFile="";
+while($a=fgets($file)){
+if(trim($a)!=$value){
+    $newFile=$newFile.$a;
+}
+
+}
+echo $newFile;
+file_put_contents($path,$newFile);
+fclose($file);
 }
 function getParam($filePath, $paramName)
 {

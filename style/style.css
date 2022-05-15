@@ -53,6 +53,10 @@ main {
   display: flex;
   justify-content: space-evenly;
 }
+.bialePole, .czarnePole{
+  border:1px solid rgba(255, 255, 255, 0.562);
+  
+}
 .bialePole {
   width: 100%;
   height: 100%;
@@ -68,6 +72,7 @@ main {
 }
 .mozliwy {
   background-color: green;
+  
 }
 #kod {
   text-align: center;

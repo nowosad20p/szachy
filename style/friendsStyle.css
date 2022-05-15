@@ -17,3 +17,17 @@ div{
     font-size: 20px;
     max-height: 30vh;
 }
+.acceptBtn{
+background-color: green;
+border:none;
+margin:2px;
+width: 20px;
+    height: 20px;
+}
+.rejectBtn{
+    background-color: red;
+    border:none;
+    margin:2px;
+    width: 20px;
+    height: 20px;
+}
