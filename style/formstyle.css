@@ -5,83 +5,96 @@ form {
   margin-left: auto;
   margin-right: auto;
   background-color: #242322;
-border-radius: 50px;
+  border-radius: 50px;
   padding: 50px;
   margin-top: 10px;
   text-align: center;
 }
-input{
-  margin-bottom:10px;
-
+input {
+  margin-bottom: 10px;
 }
 
-li{
+li {
   width: 100%;
 }
 
-input[type="submit"]:hover{
-cursor:pointer;
-background-color: #d9d3ca;
-border-color: #a8a6a2;
-color:black;
+input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: #d9d3ca;
+  border-color: #a8a6a2;
+  color: black;
 }
 a {
   color: lightblue;
 }
-p{
- text-align: center;
- color:red;
+p {
+  text-align: center;
+  color: red;
 }
-label{
-  font-size:20px;
+label {
+  font-size: 20px;
 }
-input[type="text"],input[type="password"]{
+input[type="text"],
+input[type="password"] {
   height: 25px;
-  border-radius:10px;
+  border-radius: 10px;
   width: 200px;
-  margin-left:auto;
+  margin-left: auto;
   margin-right: auto;
 }
-input[type="checkbox"]{
+input[type="checkbox"] {
   height: 20px;
   width: 20px;
-  border:none;
+  border: none;
   background-color: #89de7c;
-  
 }
-.refresh{
- 
+.refresh {
   background-color: #41ba4f;
-  border-bottom:#33803c 3px solid;
-  border-right:#33803c 3px solid;
-  color:#242322;
+  border-bottom: #33803c 3px solid;
+  border-right: #33803c 3px solid;
+  color: #242322;
   border-radius: 15px;
-  padding:5px;
+  padding: 5px;
   font-weight: bold;
-  margin-left:auto;
+  margin-left: auto;
   margin-right: auto;
 }
-.spisGier{
+.spisGier {
   height: 25vh;
-    display: flex;
-    flex-direction: column;
-    width: 20vw;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #242322;
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #242322;
   border-radius: 50px;
-    padding: 50px;
-    margin-top: 10px;
-    text-align: center;
-  
+  padding: 50px;
+  margin-top: 10px;
+  text-align: center;
 }
-.spisGier>ul{
-  height:70%;
-  overflow:auto;
+.spisGier > ul {
+  height: 70%;
+  overflow: auto;
 }
-li>a{
-  margin-left:0;
+li > a {
+  margin-left: 0;
 }
-form>p{
-  color:red;
+form > p {
+  color: red;
+}
+#friendListChk:checked ~ #friendSelect {
+  display: block;
+}
+label {
+  display: block;
+}
+#friendListChk {
+  display: block;
+}
+#friendSelect {
+  display: none;
+}
+#friendSelectContainer {
+  display: grid;
+  grid-template-columns: 9fr 1fr;
 }

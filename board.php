@@ -159,6 +159,14 @@ if ($_GET["mode"] == "update") {
         }
     }
 }
+if($_GET["mode"]=="isReverseNeeded"){
+    if($_SESSION["user"]==getParam("games/".$_GET["gameRoom"],"player1")){
+        echo "true";
+    }else{
+        echo "false";
+       
+    }
+}
 if ($_GET["mode"] == "forceBoard") {
    
     if($_SESSION["user"]==getParam("games/" . $_GET["gameRoom"], "player1")){
@@ -412,10 +420,15 @@ function generateBoard()
             if (isMovePossible("black", $i, $j, $board)) {
                 $specialClass = "mozliwy";
             }
+            $specialCss="";
+            if($_SESSION["user"]==getParam("games/".$_GET["gameRoom"],"player1")){
+                $specialCss="grid-row:".(8-$j).";grid-column:".(8-$i);
+            }
             if (($licznik + $j) % 2 == 0) {
-                $html = $html . "<div style=background-image:url('" . $pieceUrl . "') class='" . $pieceColor . $piece . " " . $specialClass . " bialePole' id='" . $i . $j . "'.></div>";
+
+                $html = $html . "<div style=background-image:url(" . $pieceUrl . ");".$specialCss." class='" . $pieceColor . $piece . " " . $specialClass . " bialePole' id='" . $i . $j . "'.></div>";
             } else {
-                $html = $html . "<div style=background-image:url('" . $pieceUrl . "') class='" . $pieceColor . $piece . " " . $specialClass . " czarnePole' id='" . $i . $j . "'></div>";
+                $html = $html . "<div style=background-image:url(" . $pieceUrl . ");".$specialCss." class='" . $pieceColor . $piece . " " . $specialClass . " czarnePole' id='" . $i . $j . "'></div>";
             }
 
             $licznik++;

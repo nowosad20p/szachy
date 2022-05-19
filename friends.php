@@ -37,8 +37,20 @@
            
             for(let i=0;i<acceptButtons.length;i++){
                 acceptButtons[i].addEventListener("click",()=>{
-                        console.log(acceptButtons[i].parentNode.querySelector("span").innerHTML);
-
+                    let request = new XMLHttpRequest();
+                    request.open("GET","friendsManager.php?mode=friendRequestAccept&secondPlayer="+acceptButtons[i].parentNode.querySelector("span").innerHTML,true);
+                    request.send();
+                    document.location.reload()
+                    },false)
+            }
+            rejectButtons=document.querySelectorAll(".rejectBtn");
+           
+            for(let i=0;i<rejectButtons.length;i++){
+                rejectButtons[i].addEventListener("click",()=>{
+                    let request = new XMLHttpRequest();
+                    request.open("GET","friendsManager.php?mode=friendRequestReject&secondPlayer="+rejectButtons[i].parentNode.querySelector("span").innerHTML,true);
+                    request.send();
+                    document.location.reload()
                     },false)
                 }
         </script>
@@ -47,9 +59,10 @@
     <?php
         $invites=fopen("users/".$_SESSION["user"]."/gameInvites.txt","r");
         while($value=fgets($invites)){
-            echo "<li>".$value."</li>";
+            echo "<li><a  href=game.php?gameRoom=$value>$value</a></li>";
         }
         ?>
+        
     </ul></div>
     </main>
     <script>

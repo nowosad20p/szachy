@@ -19,7 +19,7 @@
     <main>
         <div id="game">
             <h2 id="kod"></h2>
-            <div class="board"></div>
+            <div class="board reversed"></div>
         </div>
 
         <div id="czatContainer">
@@ -127,8 +127,17 @@
                         pola = document.querySelectorAll(".board>div");
                         for (i = 0; i < pola.length; i++) {
                             pola[i].addEventListener("click", updateBoard, false)
-
+                            
+                            
                         }
+                       
+                        
+                      
+                      
+                     
+                        
+                    
+                   
                         zamiana = document.querySelectorAll(".pieceChoice>div");
                         if (zamiana.length > 0) {
                             zamiana[0].addEventListener("click", () => {

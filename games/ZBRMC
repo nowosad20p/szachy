@@ -1,0 +1,13 @@
+player1:ae
+player2:test
+board:3133 3634 2053 4645 4004 7675 0426
+currentmove:player2
+chosenPiece1:
+chosenPiece2:75
+gameState:finished
+worthToUpdate1:false
+worthToUpdate2:false
+isWaitingForPieceChoice:false
+winner:white
+roomStatus:public
+punishment:

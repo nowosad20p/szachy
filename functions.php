@@ -49,6 +49,15 @@ echo $newFile;
 file_put_contents($path,$newFile);
 fclose($file);
 }
+function doesFileInclude($path,$value){
+    $file = fopen($path,"r");
+    while($a=fgets($file)){
+        if(trim($a)==$value){
+            return true;
+        }
+    }
+    return false;
+}
 function getParam($filePath, $paramName)
 {
     $file = fopen($filePath, "r");
