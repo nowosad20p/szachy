@@ -206,7 +206,9 @@ if ($_GET["mode"] == "get") {
     }
     if (getParam("games/" . $_GET["gameRoom"], "gameState") == "finished") {
         if(($_SESSION["user"]==getParam("games/" . $_GET["gameRoom"], "player1")&&getParam("games/" . $_GET["gameRoom"], "worthToUpdate1")=="true")||($_SESSION["user"]==getParam("games/" . $_GET["gameRoom"], "player2")&&getParam("games/" . $_GET["gameRoom"], "worthToUpdate2")=="true")){
-        echo "Gra się zakończyła";
+            echo generateBoard();
+            echo "<div id='endDiv' style=position:absolute>";
+            echo "Gra się zakończyła";
        
        
         
@@ -239,6 +241,7 @@ if ($_GET["mode"] == "get") {
             }
             
         }
+        echo "</div>";
     
     }
     }

@@ -162,3 +162,50 @@ hr{
   display:block;
   width: 100%;
 }
+#endDiv {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: #292825;
+  margin-top: 20vh;
+  margin-left: 12vw;
+}
+@media only screen and (max-width: 1200px) {
+  main {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+  #game {
+    margin-right: auto;
+    margin-left: auto;
+  }
+  #czatContainer {
+    margin-right: auto;
+    margin-left: auto;
+    width: 50%;
+    height: 50%;
+    margin-top: 30vh;
+  }
+  #gameFormContainer{
+    display: flex;
+  flex-direction: column;
+  
+  }
+  hr{
+    display:none;
+  }
+  form,.spisGier{
+    width:35vh!important;
+    margin-left:auto;
+    margin-right: auto;
+   }
+   .board{
+     width:50vh;
+     height: 50vh;
+     margin-left:auto;
+     margin-right:auto;
+   }
+
+}
+

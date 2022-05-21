@@ -1,13 +1,13 @@
 player1:ae
 player2:test
-board:
-currentmove:player1
+board:3133 3635 4004 7675 2053 3534 0426
+currentmove:player2
 chosenPiece1:
 chosenPiece2:
-gameState:ongoing
+gameState:finished
 worthToUpdate1:false
-worthToUpdate2:false
+worthToUpdate2:true
 isWaitingForPieceChoice:false
-winner:
+winner:white
 roomStatus:public
 punishment:

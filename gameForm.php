@@ -43,7 +43,7 @@
         </form>
         <form action="joinGame.php" method="GET">
             <h2>Dołącz do gry</h2>
-            <label for="joinGameCode">Kod gry:<input type="text" name="joinGameCode"></label>
+            <label for="joinGameCode">Kod gry:<br><input type="text" name="joinGameCode"></label>
             <input type="submit" value="Dołącz do gry" name="joinGameBtn" class="importantButton">
         </form>
         <hr>
