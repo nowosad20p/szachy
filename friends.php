@@ -57,10 +57,19 @@
     </ul></div>
     <div class="gameInvites">Twoje zaproszenia do gry:<ul>
     <?php
+     
         $invites=fopen("users/".$_SESSION["user"]."/gameInvites.txt","r");
+      
         while($value=fgets($invites)){
+            if(strlen(trim(getParam("games/$value","player1")))<1||strlen(trim(getParam("games/$value","player2")))<1){
             echo "<li><a  href=game.php?gameRoom=$value>$value</a></li>";
+           
+            }else{
+                removeLine("users/".$_SESSION["user"]."/gameInvites.txt",$value);
+              
+            }
         }
+    
         ?>
         
     </ul></div>

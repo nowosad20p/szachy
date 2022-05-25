@@ -1,0 +1,13 @@
+player1:test
+player2:
+board:
+currentmove:player1
+chosenPiece1:
+chosenPiece2:
+gameState:preparation
+worthToUpdate1:true
+worthToUpdate2:true
+isWaitingForPieceChoice:false
+winner:
+roomStatus:public
+punishment:

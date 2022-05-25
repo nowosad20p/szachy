@@ -1,4 +1,5 @@
 password:$2y$10$QNfFpNP5QtMeGQ/LLxvVuu.zQtaudexGr4ZkP/NT5mTkvIb6kIIj2
+role:user
 matchesWon:0
 matchesDraw:0
 matchesLost:0

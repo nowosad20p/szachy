@@ -40,7 +40,7 @@ $file=fopen($path,"r+");
 
 $newFile="";
 while($a=fgets($file)){
-if(trim($a)!=$value){
+if(trim($a)!=trim($value)){
     $newFile=$newFile.$a;
 }
 

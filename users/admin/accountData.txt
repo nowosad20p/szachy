@@ -1,0 +1,5 @@
+password:$2y$10$tPvqLK4JLGm3UCIN2PU/7exU1MLJqmvplv6CDUHVseCqw3BIsPa.e
+role:admin
+matchesWon:0
+matchesDraw:0
+matchesLost:0

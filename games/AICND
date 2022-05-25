@@ -6,7 +6,7 @@ chosenPiece1:
 chosenPiece2:
 gameState:finished
 worthToUpdate1:false
-worthToUpdate2:true
+worthToUpdate2:false
 isWaitingForPieceChoice:false
 winner:white
 roomStatus:public
