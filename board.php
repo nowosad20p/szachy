@@ -123,9 +123,14 @@ if ($_GET["mode"] == "update") {
             if (getKing("white")[2]->isChecked(getKing("white")[0], getKing("white")[1], getBoard())) {
                 changeParam("games/" . $_GET["gameRoom"], "gameState", "finished");
                 changeParam("games/" . $_GET["gameRoom"], "winner", "black");
+   
+                changeParam("users/" . getParam("games/".$_GET["gameRoom"],"player2")."/accountData.txt", "matchesWon", getParam("users/" . getParam("games/".$_GET["gameRoom"],"player2")."/accountData.txt","matchesLost")+1);
+                changeParam("users/" . getParam("games/".$_GET["gameRoom"],"player1")."/accountData.txt", "matchesLost", getParam("users/" . getParam("games/".$_GET["gameRoom"],"player1")."/accountData.txt","matchesLost")+1);
             } else {
                 changeParam("games/" . $_GET["gameRoom"], "gameState", "finished");
                 changeParam("games/" . $_GET["gameRoom"], "winner", "draw");
+                changeParam("users/" . getParam("games/".$_GET["gameRoom"],"player2")."/accountData.txt", "matchesDraw", getParam("users/" . getParam("games/".$_GET["gameRoom"],"player2")."/accountData.txt","matchesDraw")+1);
+                changeParam("users/" . getParam("games/".$_GET["gameRoom"],"player1")."/accountData.txt", "matchesDraw", getParam("users/" . getParam("games/".$_GET["gameRoom"],"player1")."/accountData.txt","matchesDraw")+1);
             }
             changeParam("games/" . $_GET["gameRoom"], "worthToUpdate1","true");
                                         changeParam("games/" . $_GET["gameRoom"], "worthToUpdate2","true");
@@ -134,9 +139,13 @@ if ($_GET["mode"] == "update") {
             if (getKing("black")[2]->isChecked(getKing("black")[0], getKing("black")[1], getBoard())) {
                 changeParam("games/" . $_GET["gameRoom"], "gameState", "finished");
                 changeParam("games/" . $_GET["gameRoom"], "winner", "white");
+                changeParam("users/" . getParam("games/".$_GET["gameRoom"],"player1")."/accountData.txt", "matchesWon", getParam("users/" . getParam("games/".$_GET["gameRoom"],"player1")."/accountData.txt","matchesLost")+1);
+                changeParam("users/" . getParam("games/".$_GET["gameRoom"],"player2")."/accountData.txt", "matchesLost", getParam("users/" . getParam("games/".$_GET["gameRoom"],"player2")."/accountData.txt","matchesLost")+1);
             } else {
                 changeParam("games/" . $_GET["gameRoom"], "gameState", "finished");
                 changeParam("games/" . $_GET["gameRoom"], "winner", "draw");
+                changeParam("users/" . getParam("games/".$_GET["gameRoom"],"player2")."/accountData.txt", "matchesDraw", getParam("users/" . getParam("games/".$_GET["gameRoom"],"player2")."/accountData.txt","matchesDraw")+1);
+                changeParam("users/" . getParam("games/".$_GET["gameRoom"],"player1")."/accountData.txt", "matchesDraw", getParam("users/" . getParam("games/".$_GET["gameRoom"],"player1")."/accountData.txt","matchesDraw")+1);
             }
             changeParam("games/" . $_GET["gameRoom"], "worthToUpdate1","true");
                                         changeParam("games/" . $_GET["gameRoom"], "worthToUpdate2","true");
