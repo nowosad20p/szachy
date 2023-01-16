@@ -1,5 +1,4 @@
-Projekt szachów (https://szachy-projekt.000webhostapp.com)
-Szachy dla dwóch graczy online.
+Projekt szachów (https://szachy-projekt.000webhostapp.com) dla dwóch graczy.
 Użyte technologie:
 -HTML,
 -CSS,
