@@ -1,4 +1,16 @@
-Szachy - https://szachyborze.zsti.me
-Strona oferująca możliwość grania w szachy.
-Aby zagrać wymagane są dwa konta.
-Szachy na obecnym etapie: https://trello.com/invite/b/lpKppFOX/a7556373ee589ea0ffcbd2e33e446fe6/szachy-borze
+Projekt szachów (https://szachy-projekt.000webhostapp.com)
+Szachy dla dwóch graczy online.
+Użyte technologie:
+-HTML,
+-CSS,
+-JavaScript,
+-PHP,
+-AJAX
+
+Czego się nauczyłem:
+-działania na plikach w php,
+-AJAX,
+-szyfrowanie haseł,
+-logika odpowiadająca za szachy,
+-logika odpowiadająca za pokoje gier oraz podstawowe zasady działania serwera w grach wieloosobowych,
+-walidacja użytkowników
